@@ -1,101 +1,72 @@
 package diplom.try1.DAO;
 
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Objects;
 
 @Component
 public class ExelParser {
 
     public void parser(MultipartFile multipartFile){
+        InputStream inputStream = null;
+        HSSFWorkbook workbook = null;
+        System.out.println(multipartFile.getOriginalFilename());
 
-//        ArrayList<city> arrayListCity = new ArrayList<>();
-//        InputStream inputStream = null;
-//        XSSFWorkbook workbook = null;
-//        try {
-//            inputStream = new FileInputStream((File) multipartFile);
-//            workbook = new XSSFWorkbook(inputStream);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        Sheet sheet = workbook.getSheetAt(0);
-//        Iterator<Row> it = sheet.iterator();
-//        it.next();
-//        int problem = 0;
-//        while (it.hasNext()) {
-////            city obj = new city();
-////            SimpleDateFormat formatForDateNow = new SimpleDateFormat("HH:mm:ss");
-//            Row row = it.next();
-//            Iterator<Cell> cells = row.iterator();
-//            int i = 0;
-//            while (cells.hasNext()) {
-//                Cell cell = cells.next();
-//                if(i >= 5) break;
-//                switch (i) {
-//                    case 0:
-////                        try {
-////                            obj.setDay((int)cell.getNumericCellValue());
-////                        } catch (Exception e) {
-////                            System.out.println(arrayListCity.get(arrayListCity.size()-1));
-////                            obj.setDay((int)cell.getNumericCellValue());
-////                        }
-//                        break;
-////                    case 1:
-////                        obj.setTime(formatForDateNow.format(cell.getDateCellValue().getTime()));
-////                        break;
-////                    case 2:
-////                        try {
-////                            obj.setTemperature((int) cell.getNumericCellValue());
-////                        } catch (Exception e){
-////                            double a = arrayListCity.stream().collect(Collectors.averagingInt(city::getTemperature));
-////                            obj.setTemperature((int)a);
-////                        }
-////                        break;
-////                    case 3:
-////                        try {
-////                            obj.setDirection(cell.getStringCellValue());
-////                        } catch (Exception e) {
-////                            problem++;
-////                            double a = arrayListCity.stream().collect(Collectors.averagingInt(city::getSpeed));
-////                            try {
-////                                obj.setSpeed((int) a);
-////                                obj.setDirection(arrayListCity.get(arrayListCity.size()-1).getDirection());
-////                                // На случай когда мы в самом начале словили пропуск
-////                            } catch (Exception e1) {
-////                                continue;
-////                            }
-////                        }
-////                        break;
-////                    case 4:
-////                        try{
-////                            if((int)cell.getNumericCellValue() < 0) obj.setSpeed((int)cell.getNumericCellValue() * -1);
-////                            else obj.setSpeed((int)cell.getNumericCellValue());
-////                            if (problem != 0){
-////                                // если пропуск в самом начале
-////                                if ((arrayListCity.size() - problem) == 0) ; else problem /= 2;
-////                                while(problem != 0){
-////                                    arrayListCity.get(arrayListCity.size()-problem).setDirection(obj.getDirection());
-////                                    problem--;
-////                                }
-////                            }
-////                        } catch (Exception e){
-////                            try{
-////                                obj.setSpeed(arrayListCity.get(arrayListCity.size()-1).getSpeed());
-////                            } catch (Exception e2) {
-////                                obj.setSpeed(0);
-////                            }
-////                        }
-////                        break;
-//                }
-//                i++;
-//            }
-////            arrayListCity.add(obj);
-//        }
+        File convFile = new File(Objects.requireNonNull(multipartFile.getOriginalFilename()));
+        try {
+            if(convFile.createNewFile()) {
+                FileOutputStream fos = new FileOutputStream(convFile);
+                fos.write(multipartFile.getBytes());
+                fos.close(); //IOUtils.closeQuietly(fos);
+                try {
+                    inputStream = new FileInputStream(convFile);
 
+                    workbook = new HSSFWorkbook(inputStream);
+                    Sheet sheet = workbook.getSheetAt(0);
+                    Iterator<Row> it = sheet.iterator();
+                    for (int i=0; i<15; i++){
+                        it.next();
+                    }
+                    while (it.hasNext()) {
+                        Row row = it.next();
+                        Iterator<Cell> cells = row.iterator();
+                        int i = 0;
+                        while (cells.hasNext()) {
+                            if (i>55) break;
+                            Cell cell = cells.next();
+                            try {
+                                System.out.println(cell.getNumericCellValue());
+                            } catch (Exception e){
+                                System.out.println(cell.getStringCellValue());
+                            }
+//                            switch (i){
+//                                case 1:
+//                                    System.out.println(cell.getStringCellValue());
+//                                    break;
+//                                default:
+//                                    break;
+//                            }
+                            i++;
+                        }
+                        break; // 1 запись тестим
+                    }
+                } catch (IOException e) {
+                    System.out.println("try2");
+                    e.printStackTrace();
+                }
+            } else System.out.println("Файл существует");
+        } catch (IOException e) {
+            System.out.println("try1");
+            convFile = null;
+        }
     }
 }
