@@ -127,4 +127,6 @@ public class all_data {
     private float all;
     @Column(name = "Всього годин 2")
     private float all2;
+    @Column(name = "Обсяг дисциплін за семестр")
+    private float obsyag;
 }

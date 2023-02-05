@@ -1,16 +1,21 @@
 package diplom.try1.DAO;
 
+import diplom.try1.Model.all_data;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.stereotype.Component;
+import org.springframework.util.ClassUtils;
 import org.springframework.web.multipart.MultipartFile;
+import org.apache.commons.lang3.reflect.FieldUtils;
 
 import java.io.*;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Objects;
 
 @Component
@@ -19,6 +24,8 @@ public class ExelParser {
     public void parser(MultipartFile multipartFile, int sem11, int sem12, int sem21, int sem22){
         InputStream inputStream = null;
         HSSFWorkbook workbook = null;
+        Class<all_data> all_dataClass = all_data.class;
+
         System.out.println(multipartFile.getOriginalFilename());
 
         File convFile = new File(Objects.requireNonNull(multipartFile.getOriginalFilename()));
@@ -53,17 +60,39 @@ public class ExelParser {
 
                         Row row = it.next();
                         Iterator<Cell> cells = row.iterator();
-                        int i = 0;
+                        cells.next();
+
+                        int i = 1; // от какого поля двигаться
+
+                        all_data obj = new all_data(); // объект в котором будут храниться данные
+                        if(count<=sem12) obj.setSemestr(1);
+                        if (count>=sem21) obj.setSemestr(2);
+                        Field[] declaredFields = all_dataClass.getDeclaredFields();
+
+
                         while (cells.hasNext()) {
-                            if (i>55) break;
+                            if (i>55) break; // важный счёткий до  какого поля нам двигаться в таблице
                             Cell cell = cells.next();
 
 
+
+
+
+
+
+
+
+                            declaredFields[i].setAccessible(true);
                             try {
-                                System.out.print(cell.getNumericCellValue()+" |");
+//                                declaredFields[i].setDouble(obj,cell.getNumericCellValue());
+                                System.out.print(declaredFields[i+1].getName() + " " +cell.getNumericCellValue()+" |");
                             } catch (Exception e){
-                                System.out.print(cell.getStringCellValue()+" |");
+                                System.out.print(declaredFields[i+1].getName() + " " +cell.getStringCellValue()+" .|");
                             }
+
+
+
+
 
 
 //                            switch (i){
@@ -96,4 +125,5 @@ public class ExelParser {
 
 
     }
+
 }
