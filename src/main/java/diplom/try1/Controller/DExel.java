@@ -25,15 +25,12 @@ public class DExel {
 
     @GetMapping("/")
     public String start(Model model){
-
-
         return "/index";
     }
 
     @PostMapping("/load")
     public String load(Model model, @RequestParam MultipartFile file, @RequestParam int sem11,
                        @RequestParam int sem12, @RequestParam int sem21, @RequestParam int sem22){
-
         ArrayList<all_data> datalist = exelParser.parser(file, sem11, sem12, sem21, sem22);
         bdDAO.savedatalist(datalist);
         return "/index";

@@ -1,21 +1,30 @@
 package diplom.try1.Model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
+import jakarta.persistence.*;
 import jdk.jfr.Enabled;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
 
-@Enabled
+
+@Entity
 @Getter
 @Setter
+@Table(name = "all_data")
 public class all_data {
+    @jakarta.persistence.Id
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ID", nullable = false)
     private Long id;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     @Column(name = "semestr")
     private double semestr;
@@ -129,6 +138,8 @@ public class all_data {
     private double all2;
     @Column(name = "Обсяг дисциплін за семестр")
     private double obsyag;
+    @Column(name = "Викладач")
+    private String nameV;
 
     @Override
     public String toString() {
@@ -192,4 +203,5 @@ public class all_data {
                 ", obsyag=" + obsyag +
                 '}';
     }
+
 }
