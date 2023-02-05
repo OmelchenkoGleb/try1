@@ -1,6 +1,7 @@
 package diplom.try1.Controller;
 
 import ch.qos.logback.core.model.Model;
+import diplom.try1.DAO.BdDAO;
 import diplom.try1.DAO.ExelParser;
 import diplom.try1.Model.all_data;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,8 @@ public class DExel {
     @Autowired
     ExelParser exelParser;
 
+    @Autowired
+    BdDAO bdDAO;
 
 
     @GetMapping("/")
@@ -32,7 +35,7 @@ public class DExel {
                        @RequestParam int sem12, @RequestParam int sem21, @RequestParam int sem22){
 
         ArrayList<all_data> datalist = exelParser.parser(file, sem11, sem12, sem21, sem22);
-
+        bdDAO.savedatalist(datalist);
         return "/index";
     }
 }
