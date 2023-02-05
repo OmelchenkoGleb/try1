@@ -5,38 +5,31 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.stereotype.Component;
-import org.springframework.util.ClassUtils;
 import org.springframework.web.multipart.MultipartFile;
-import org.apache.commons.lang3.reflect.FieldUtils;
 
 import java.io.*;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Objects;
 
 @Component
 public class ExelParser {
 
-    public void parser(MultipartFile multipartFile, int sem11, int sem12, int sem21, int sem22){
+    public ArrayList<all_data> parser(MultipartFile multipartFile, int sem11, int sem12, int sem21, int sem22){
         InputStream inputStream = null;
         HSSFWorkbook workbook = null;
         Class<all_data> all_dataClass = all_data.class;
-
-        System.out.println(multipartFile.getOriginalFilename());
-
+        ArrayList<all_data> datalist = new ArrayList<>();
         File convFile = new File(Objects.requireNonNull(multipartFile.getOriginalFilename()));
         try {
             if(convFile.createNewFile()) {
                 FileOutputStream fos = new FileOutputStream(convFile);
                 fos.write(multipartFile.getBytes());
-                fos.close(); //IOUtils.closeQuietly(fos);
+                fos.close();
                 try {
                     inputStream = new FileInputStream(convFile);
-
                     workbook = new HSSFWorkbook(inputStream);
                     Sheet sheet = workbook.getSheetAt(0);
                     Iterator<Row> it = sheet.iterator();
@@ -82,48 +75,45 @@ public class ExelParser {
 
 
 
-                            declaredFields[i].setAccessible(true);
+                            declaredFields[i+1].setAccessible(true);
                             try {
-//                                declaredFields[i].setDouble(obj,cell.getNumericCellValue());
-                                System.out.print(declaredFields[i+1].getName() + " " +cell.getNumericCellValue()+" |");
+                                declaredFields[i+1].setDouble(obj,cell.getNumericCellValue());
+                                System.out.print((i+1)+" "+declaredFields[i+1].getName() + " " +cell.getNumericCellValue()+" |");
                             } catch (Exception e){
-                                System.out.print(declaredFields[i+1].getName() + " " +cell.getStringCellValue()+" .|");
+                                if ((i+1) == 2) declaredFields[i+1].set(obj,cell.getStringCellValue());
+                                else declaredFields[i+1].setDouble(obj,0);
+                                System.out.print((i+1)+" "+declaredFields[i+1].getName() + " " +cell.getStringCellValue()+" .|");
                             }
-
-
-
-
-
-
-//                            switch (i){
-//                                case 1:
-//                                    System.out.println(cell.getStringCellValue());
-//                                    break;
-//                                default:
-//                                    break;
-//                            }
                             i++;
                         }
                         System.out.println();
                         count++;
-
+                        datalist.add(obj);
 
 //                        break; // 1 запись тестим
                     }
-                } catch (IOException e) {
+
+                } catch (IOException | IllegalAccessException e) {
                     System.out.println("try2");
                     e.printStackTrace();
                 }
                 if(convFile.delete()){
                     System.out.println("Файл был удален с корневой папки проекта");
-                }else System.out.println("Файл не был найден в корневой папке проекта");
-            } else System.out.println("Файл существует");
+                    return datalist;
+                }else {
+                    System.out.println("Файл не был найден в корневой папке проекта");
+                    return null;
+                }
+            } else {
+                System.out.println("Файл существует");
+                return null;
+            }
         } catch (IOException e) {
             System.out.println("try1");
             convFile = null;
         }
 
-
+        return null;
     }
 
 }

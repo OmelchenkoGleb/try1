@@ -18,115 +18,178 @@ public class all_data {
     private Long id;
 
     @Column(name = "semestr")
-    private float semestr;
+    private double semestr;
     @Column(name = "Назва дисципліни, курс, шифр груп")
     private String name;
     @Column(name = "N")
-    private float N;
+    private double N;
     @Column(name = "Л")
-    private float LL;
+    private double LL;
     @Column(name = "П")
-    private float PP;
+    private double PP;
     @Column(name = "L")
-    private float L;
+    private double L;
     @Column(name = "І")
-    private float I;
+    private double I;
     @Column(name = "Е")
-    private float E;
+    private double E;
     @Column(name = "Z")
-    private float Z;
+    private double Z;
     @Column(name = "М")
-    private float M;
+    private double M;
     @Column(name = "Q")
-    private float Q;
+    private double Q;
     @Column(name = "G")
-    private float G;
+    private double G;
     @Column(name = "R")
-    private float R;
+    private double R;
     @Column(name = "D")
-    private float D;
+    private double D;
     @Column(name = "F")
-    private float F;
+    private double F;
     @Column(name = "Г")
-    private float GG;
+    private double GG;
     @Column(name = "ГП")
-    private float GGPP;
+    private double GGPP;
     @Column(name = "ГL")
-    private float GGL;
+    private double GGL;
     @Column(name = "ГК")
-    private float GGk;
+    private double GGk;
     @Column(name = "ГКП")
-    private float GGKPP;
+    private double GGKPP;
     @Column(name = "ГКL")
-    private float GGKL;
+    private double GGKL;
     @Column(name = "Б")
-    private float BB;
+    private double BB;
     @Column(name = "К")
-    private float K;
+    private double K;
     @Column(name = "БК")
-    private float BBk;
+    private double BBk;
     @Column(name = "КК")
-    private float KK;
+    private double KK;
     @Column(name = "Р")
-    private float P;
+    private double P;
     @Column(name = "РК")
-    private float PK;
+    private double PK;
     @Column(name = "Л х Р")
-    private float LL_P;
+    private double LL_P;
     @Column(name = "Л х РК")
-    private float LL_PK;
+    private double LL_PK;
     @Column(name = "П х ГП")
-    private float PP_GGPP;
+    private double PP_GGPP;
     @Column(name = "П х ГКП")
-    private float PP_GGKPP;
+    private double PP_GGKPP;
     @Column(name = "L х ГL")
-    private float L_GGL;
+    private double L_GGL;
     @Column(name = "L х ГКL")
-    private float L_GGKL;
+    private double L_GGKL;
     @Column(name = "ІхГх0,25")
-    private float I_GG_025;
+    private double I_GG_025;
     @Column(name = "ІхГх0,26")
-    private float I_GG_026;
+    private double I_GG_026;
     @Column(name = "0.33хEx(Б+БК)")
-    private float E_BBBBK_033;
+    private double E_BBBBK_033;
     @Column(name = "0.33хEx(К+КК)")
-    private float E_KKK_033;
+    private double E_KKK_033;
     @Column(name = "Заліки,+AL10")
-    private float zaliki;
+    private double zaliki;
     @Column(name = "2хГхZ")
-    private float GG_Z_2;
+    private double GG_Z_2;
     @Column(name = "0.25хМх(Б+БК)")
-    private float M_025_BBBBK;
+    private double M_025_BBBBK;
     @Column(name = "0.25хМх(К+КК)")
-    private float M_025_KKK;
+    private double M_025_KKK;
     @Column(name = "Qх(Б+БК)")
-    private float Q_BBBBK;
+    private double Q_BBBBK;
     @Column(name = "Qх(К+КК)")
-    private float Q_KKK;
+    private double Q_KKK;
     @Column(name = "Gх(Б+БК)")
-    private float G_BBBBK;
+    private double G_BBBBK;
     @Column(name = "Gх(К+КК)")
-    private float G_KKK;
+    private double G_KKK;
     @Column(name = "0.5хRх(Б+БК)")
-    private float R_BBBBK_05;
+    private double R_BBBBK_05;
     @Column(name = "0.5хRх(К+КК)")
-    private float R_KKK_05;
+    private double R_KKK_05;
     @Column(name = "0.33хDх(Б+БК)")
-    private float D_BBBBK_033;
+    private double D_BBBBK_033;
     @Column(name = "0.33хDх(К+КК)")
-    private float D_KKK_033;
+    private double D_KKK_033;
     @Column(name = "0.25хFх(Б+БК)")
-    private float BBBBK_F_025;
+    private double BBBBK_F_025;
     @Column(name = "0.25хFх(К+КК)")
-    private float KKK_F_025;
+    private double KKK_F_025;
     @Column(name = "2 х E х Г + 0,06 х N х (Б+БК)/25")
-    private float E_GG_2_006_N_BBBBK_25;
+    private double E_GG_2_006_N_BBBBK_25;
     @Column(name = "2хЕхГК+0,06хNх(К+КК)/25")
-    private float E_2_GGK_006_N_KKK_25;
+    private double E_2_GGK_006_N_KKK_25;
     @Column(name = "Всього годин")
-    private float all;
+    private double all;
     @Column(name = "Всього годин 2")
-    private float all2;
+    private double all2;
     @Column(name = "Обсяг дисциплін за семестр")
-    private float obsyag;
+    private double obsyag;
+
+    @Override
+    public String toString() {
+        return "all_data{" +
+                "id=" + id +
+                ", semestr=" + semestr +
+                ", name='" + name + '\'' +
+                ", N=" + N +
+                ", LL=" + LL +
+                ", PP=" + PP +
+                ", L=" + L +
+                ", I=" + I +
+                ", E=" + E +
+                ", Z=" + Z +
+                ", M=" + M +
+                ", Q=" + Q +
+                ", G=" + G +
+                ", R=" + R +
+                ", D=" + D +
+                ", F=" + F +
+                ", GG=" + GG +
+                ", GGPP=" + GGPP +
+                ", GGL=" + GGL +
+                ", GGk=" + GGk +
+                ", GGKPP=" + GGKPP +
+                ", GGKL=" + GGKL +
+                ", BB=" + BB +
+                ", K=" + K +
+                ", BBk=" + BBk +
+                ", KK=" + KK +
+                ", P=" + P +
+                ", PK=" + PK +
+                ", LL_P=" + LL_P +
+                ", LL_PK=" + LL_PK +
+                ", PP_GGPP=" + PP_GGPP +
+                ", PP_GGKPP=" + PP_GGKPP +
+                ", L_GGL=" + L_GGL +
+                ", L_GGKL=" + L_GGKL +
+                ", I_GG_025=" + I_GG_025 +
+                ", I_GG_026=" + I_GG_026 +
+                ", E_BBBBK_033=" + E_BBBBK_033 +
+                ", E_KKK_033=" + E_KKK_033 +
+                ", zaliki=" + zaliki +
+                ", GG_Z_2=" + GG_Z_2 +
+                ", M_025_BBBBK=" + M_025_BBBBK +
+                ", M_025_KKK=" + M_025_KKK +
+                ", Q_BBBBK=" + Q_BBBBK +
+                ", Q_KKK=" + Q_KKK +
+                ", G_BBBBK=" + G_BBBBK +
+                ", G_KKK=" + G_KKK +
+                ", R_BBBBK_05=" + R_BBBBK_05 +
+                ", R_KKK_05=" + R_KKK_05 +
+                ", D_BBBBK_033=" + D_BBBBK_033 +
+                ", D_KKK_033=" + D_KKK_033 +
+                ", BBBBK_F_025=" + BBBBK_F_025 +
+                ", KKK_F_025=" + KKK_F_025 +
+                ", E_GG_2_006_N_BBBBK_25=" + E_GG_2_006_N_BBBBK_25 +
+                ", E_2_GGK_006_N_KKK_25=" + E_2_GGK_006_N_KKK_25 +
+                ", all=" + all +
+                ", all2=" + all2 +
+                ", obsyag=" + obsyag +
+                '}';
+    }
 }
