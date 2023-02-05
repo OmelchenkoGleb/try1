@@ -16,7 +16,7 @@ import java.util.Objects;
 @Component
 public class ExelParser {
 
-    public void parser(MultipartFile multipartFile){
+    public void parser(MultipartFile multipartFile, int sem11, int sem12, int sem21, int sem22){
         InputStream inputStream = null;
         HSSFWorkbook workbook = null;
         System.out.println(multipartFile.getOriginalFilename());
@@ -33,21 +33,39 @@ public class ExelParser {
                     workbook = new HSSFWorkbook(inputStream);
                     Sheet sheet = workbook.getSheetAt(0);
                     Iterator<Row> it = sheet.iterator();
-                    for (int i=0; i<15; i++){
+
+
+                    for (int i=0; i<sem11-1; i++){
                         it.next();
                     }
+
+                    int count = 0;
+
                     while (it.hasNext()) {
+                        if (count == (sem12-sem11+1)){
+                            System.out.println("Начался 2 семестр");
+                            for (int n=0; n<sem21-sem12; n++){
+                                it.next();
+                            }
+                            count=sem21;
+                        } else if (count == sem22) break;
+
+
                         Row row = it.next();
                         Iterator<Cell> cells = row.iterator();
                         int i = 0;
                         while (cells.hasNext()) {
                             if (i>55) break;
                             Cell cell = cells.next();
+
+
                             try {
-                                System.out.println(cell.getNumericCellValue());
+                                System.out.print(cell.getNumericCellValue()+" |");
                             } catch (Exception e){
-                                System.out.println(cell.getStringCellValue());
+                                System.out.print(cell.getStringCellValue()+" |");
                             }
+
+
 //                            switch (i){
 //                                case 1:
 //                                    System.out.println(cell.getStringCellValue());
@@ -57,16 +75,25 @@ public class ExelParser {
 //                            }
                             i++;
                         }
-                        break; // 1 запись тестим
+                        System.out.println();
+                        count++;
+
+
+//                        break; // 1 запись тестим
                     }
                 } catch (IOException e) {
                     System.out.println("try2");
                     e.printStackTrace();
                 }
+                if(convFile.delete()){
+                    System.out.println("Файл был удален с корневой папки проекта");
+                }else System.out.println("Файл не был найден в корневой папке проекта");
             } else System.out.println("Файл существует");
         } catch (IOException e) {
             System.out.println("try1");
             convFile = null;
         }
+
+
     }
 }

@@ -23,9 +23,10 @@ public class DExel {
     }
 
     @PostMapping("/load")
-    public String load(Model model, @RequestParam MultipartFile file){
+    public String load(Model model, @RequestParam MultipartFile file, @RequestParam int sem11,
+                       @RequestParam int sem12, @RequestParam int sem21, @RequestParam int sem22){
 
-        exelParser.parser(file);
+        exelParser.parser(file, sem11, sem12, sem21, sem22);
 
         return "/index";
     }
