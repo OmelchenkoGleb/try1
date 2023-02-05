@@ -1,0 +1,316 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+
+  <title>Title</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href = "/static/css/css.css">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+
+  <style>
+    .form-control{
+      margin-left: auto;
+      margin-right: auto;
+      width: 30em;
+    }
+  </style>
+</head>
+<body>
+
+
+
+<div class="jumbotron text-center">
+  <h1>Перший семестр</h1>
+</div>
+<input class="form-control" id="Input1" type="text" placeholder="Ведіть інформацію по якій шукати для першого семестра..">
+<br>
+<div class="table-responsive-sm">
+  <table class="table table-bordered table-dark table-striped">
+    <thead class="thead-light">
+    <tr>
+      <th>Факультет(ін-т). Назва  дисципліни, іі загальний обсяг в годинах. Курс навчання, шифр груп, к-сть студентів в кожній групі (Б+К)</th>
+      <th>Викладач</th>
+      <th>Обсяг дисципліни за семестр</th>
+      <th>Лекції</th>
+      <th>Практ</th>
+      <th>Лабор</th>
+      <th>Індивідуальні заняття </th>
+      <th>Екзамени</th>
+      <th>Заліки</th>
+      <th>Контр.роб</th>
+      <th>Курсові проекти</th>
+      <th>Курсові роботи</th>
+      <th>РГР, РР, ГР,</th>
+      <th>ДКР</th>
+      <th>Реферати</th>
+      <th>Академічні бюдж</th>
+      <th>Підгрупи для ПЗ</th>
+      <th>Підгр. для лаб.роб</th>
+      <th>Академ. контрактні</th>
+      <th>Підгрупи для ПЗ</th>
+      <th>Підгр. для лаб.роб</th>
+      <th>Б</th>
+      <th>К</th>
+      <th>БК</th>
+      <th>КК</th>
+      <th>Кількість бюджетних потоків</th>
+      <th>Кількість контрактних потоків</th>
+      <th>Лекції, Л х Р</th>
+      <th>Лекції, Л х РК</th>
+      <th>Практ.заняття (комп. практикум, семінари), П х ГП семінари), П х ГП</th>
+      <th>Практ.заняття (семінари), П х ГКП</th>
+      <th>Лаб.заняття(комп"ют.практик.), L х ГL</th>
+      <th>Лаб.заняття(комп"ют.практик.), L х ГКL</th>
+      <th>Індивідуальні заняття ІхГх0,25</th>
+      <th>Індивідуальні заняття ІхГх0,26</th>
+      <th>Екзамени, 0.33хEx(Б+БК)</th>
+      <th>Екзамени, 0.33хEx(К+КК)</th>
+      <th>Екзамени, 0.33хEx(К+КК)</th>
+      <th>Заліки, 2хГхZ</th>
+      <th>Контр.роб.(мод.,темат.), 0.25хМх(Б+БК)</th>
+      <th>Контр.роб.(мод.,темат.), 0.25хМх(К+КК)</th>
+      <th>Курсові проекти, Qх(Б+БК)</th>
+      <th>Курсові проекти, Qх(К+КК)</th>
+      <th>Курсові роботи, Gх(Б+БК)</th>
+      <th>Курсові роботи, Gх(К+КК)</th>
+      <th>РГР, РР, ГР,  0.5хRх(Б+БК)</th>
+      <th>РГР, РР, ГР,  0.5хRх(К+КК)</th>
+      <th>ДКР, 0.33хDх(Б+БК)</th>
+      <th>ДКР, 0.33хDх(К+КК)</th>
+      <th>Реферати, 0.25хFх(Б+БК)</th>
+      <th>Реферати, 0.25хFх(К+КК)</th>
+      <th>Консультації, 2 х E х Г + 0,06 х N х (Б+БК)/25</th>
+      <th>Консультації, 2хЕхГК+0,06хNх(К+КК)/25</th>
+      <th>Всього годин</th>
+      <th>Всього годин</th>
+      <th>Обсяг дисципліни за семестр, N годин</th>
+    </tr>
+    </thead>
+    <tbody id="Table1">
+    <tr th:each="el : ${data1}">
+      <th th:text="${el.name}"></th>
+      <th th:text="${el.nameV}"></th>
+      <th th:text="${el.N}"></th>
+      <th th:text="${el.LL}"></th>
+      <th th:text="${el.PP}"></th>
+      <th th:text="${el.L}"></th>
+      <th th:text="${el.I}"></th>
+      <th th:text="${el.E}"></th>
+      <th th:text="${el.Z}"></th>
+      <th th:text="${el.M}"></th>
+      <th th:text="${el.Q}"></th>
+      <th th:text="${el.G}"></th>
+      <th th:text="${el.R}"></th>
+      <th th:text="${el.D}"></th>
+      <th th:text="${el.F}"></th>
+      <th th:text="${el.GG}"></th>
+      <th th:text="${el.GGPP}"></th>
+      <th th:text="${el.GGL}"></th>
+      <th th:text="${el.GGk}"></th>
+      <th th:text="${el.GGKPP}"></th>
+      <th th:text="${el.GGKL}"></th>
+      <th th:text="${el.BB}"></th>
+      <th th:text="${el.K}"></th>
+      <th th:text="${el.BBk}"></th>
+      <th th:text="${el.KK}"></th>
+      <th th:text="${el.P}"></th>
+      <th th:text="${el.PK}"></th>
+      <th th:text="${el.LL_P}"></th>
+      <th th:text="${el.LL_PK}"></th>
+      <th th:text="${el.PP_GGPP}"></th>
+      <th th:text="${el.PP_GGKPP}"></th>
+      <th th:text="${el.L_GGL}"></th>
+      <th th:text="${el.L_GGKL}"></th>
+      <th th:text="${el.I_GG_025}"></th>
+      <th th:text="${el.I_GG_026}"></th>
+      <th th:text="${el.E_BBBBK_033}"></th>
+      <th th:text="${el.E_KKK_033}"></th>
+      <th th:text="${el.zaliki}"></th>
+      <th th:text="${el.GG_Z_2}"></th>
+      <th th:text="${el.M_025_BBBBK}"></th>
+      <th th:text="${el.M_025_KKK}"></th>
+      <th th:text="${el.Q_BBBBK}"></th>
+      <th th:text="${el.Q_KKK}"></th>
+      <th th:text="${el.G_BBBBK}"></th>
+      <th th:text="${el.G_KKK}"></th>
+      <th th:text="${el.R_BBBBK_05}"></th>
+      <th th:text="${el.R_KKK_05}"></th>
+      <th th:text="${el.D_BBBBK_033}"></th>
+      <th th:text="${el.D_KKK_033}"></th>
+      <th th:text="${el.BBBBK_F_025}"></th>
+      <th th:text="${el.KKK_F_025}"></th>
+      <th th:text="${el.E_GG_2_006_N_BBBBK_25}"></th>
+      <th th:text="${el.E_2_GGK_006_N_KKK_25}"></th>
+      <th th:text="${el.all}"></th>
+      <th th:text="${el.all2}"></th>
+      <th th:text="${el.obsyag}"></th>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+
+<div class="jumbotron text-center ">
+  <h1>Другий семестр</h1>
+</div>
+<input class="form-control" id="Input2" type="text" placeholder="Ведіть інформацію по якій шукати для другого семестра">
+<br>
+<div class="table-responsive-sm">
+  <table class="table table-bordered table-dark table-striped">
+    <thead class="thead-light">
+    <tr>
+      <th>Факультет(ін-т). Назва  дисципліни, іі загальний обсяг в годинах. Курс навчання, шифр груп, к-сть студентів в кожній групі (Б+К)</th>
+      <th>Викладач</th>
+      <th>Обсяг дисципліни за семестр</th>
+      <th>Лекції</th>
+      <th>Практ</th>
+      <th>Лабор</th>
+      <th>Індивідуальні заняття </th>
+      <th>Екзамени</th>
+      <th>Заліки</th>
+      <th>Контр.роб</th>
+      <th>Курсові проекти</th>
+      <th>Курсові роботи</th>
+      <th>РГР, РР, ГР,</th>
+      <th>ДКР</th>
+      <th>Реферати</th>
+      <th>Академічні бюдж</th>
+      <th>Підгрупи для ПЗ</th>
+      <th>Підгр. для лаб.роб</th>
+      <th>Академ. контрактні</th>
+      <th>Підгрупи для ПЗ</th>
+      <th>Підгр. для лаб.роб</th>
+      <th>Б</th>
+      <th>К</th>
+      <th>БК</th>
+      <th>КК</th>
+      <th>Кількість бюджетних потоків</th>
+      <th>Кількість контрактних потоків</th>
+      <th>Лекції, Л х Р</th>
+      <th>Лекції, Л х РК</th>
+      <th>Практ.заняття (комп. практикум, семінари), П х ГП семінари), П х ГП</th>
+      <th>Практ.заняття (семінари), П х ГКП</th>
+      <th>Лаб.заняття(комп"ют.практик.), L х ГL</th>
+      <th>Лаб.заняття(комп"ют.практик.), L х ГКL</th>
+      <th>Індивідуальні заняття ІхГх0,25</th>
+      <th>Індивідуальні заняття ІхГх0,26</th>
+      <th>Екзамени, 0.33хEx(Б+БК)</th>
+      <th>Екзамени, 0.33хEx(К+КК)</th>
+      <th>Екзамени, 0.33хEx(К+КК)</th>
+      <th>Заліки, 2хГхZ</th>
+      <th>Контр.роб.(мод.,темат.), 0.25хМх(Б+БК)</th>
+      <th>Контр.роб.(мод.,темат.), 0.25хМх(К+КК)</th>
+      <th>Курсові проекти, Qх(Б+БК)</th>
+      <th>Курсові проекти, Qх(К+КК)</th>
+      <th>Курсові роботи, Gх(Б+БК)</th>
+      <th>Курсові роботи, Gх(К+КК)</th>
+      <th>РГР, РР, ГР,  0.5хRх(Б+БК)</th>
+      <th>РГР, РР, ГР,  0.5хRх(К+КК)</th>
+      <th>ДКР, 0.33хDх(Б+БК)</th>
+      <th>ДКР, 0.33хDх(К+КК)</th>
+      <th>Реферати, 0.25хFх(Б+БК)</th>
+      <th>Реферати, 0.25хFх(К+КК)</th>
+      <th>Консультації, 2 х E х Г + 0,06 х N х (Б+БК)/25</th>
+      <th>Консультації, 2хЕхГК+0,06хNх(К+КК)/25</th>
+      <th>Всього годин</th>
+      <th>Всього годин</th>
+      <th>Обсяг дисципліни за семестр, N годин</th>
+    </tr>
+    </thead>
+    <tbody id="Table2">
+    <tr th:each="el : ${data2}">
+      <th th:text="${el.name}"></th>
+      <th th:text="${el.nameV}"></th>
+      <th th:text="${el.N}"></th>
+      <th th:text="${el.LL}"></th>
+      <th th:text="${el.PP}"></th>
+      <th th:text="${el.L}"></th>
+      <th th:text="${el.I}"></th>
+      <th th:text="${el.E}"></th>
+      <th th:text="${el.Z}"></th>
+      <th th:text="${el.M}"></th>
+      <th th:text="${el.Q}"></th>
+      <th th:text="${el.G}"></th>
+      <th th:text="${el.R}"></th>
+      <th th:text="${el.D}"></th>
+      <th th:text="${el.F}"></th>
+      <th th:text="${el.GG}"></th>
+      <th th:text="${el.GGPP}"></th>
+      <th th:text="${el.GGL}"></th>
+      <th th:text="${el.GGk}"></th>
+      <th th:text="${el.GGKPP}"></th>
+      <th th:text="${el.GGKL}"></th>
+      <th th:text="${el.BB}"></th>
+      <th th:text="${el.K}"></th>
+      <th th:text="${el.BBk}"></th>
+      <th th:text="${el.KK}"></th>
+      <th th:text="${el.P}"></th>
+      <th th:text="${el.PK}"></th>
+      <th th:text="${el.LL_P}"></th>
+      <th th:text="${el.LL_PK}"></th>
+      <th th:text="${el.PP_GGPP}"></th>
+      <th th:text="${el.PP_GGKPP}"></th>
+      <th th:text="${el.L_GGL}"></th>
+      <th th:text="${el.L_GGKL}"></th>
+      <th th:text="${el.I_GG_025}"></th>
+      <th th:text="${el.I_GG_026}"></th>
+      <th th:text="${el.E_BBBBK_033}"></th>
+      <th th:text="${el.E_KKK_033}"></th>
+      <th th:text="${el.zaliki}"></th>
+      <th th:text="${el.GG_Z_2}"></th>
+      <th th:text="${el.M_025_BBBBK}"></th>
+      <th th:text="${el.M_025_KKK}"></th>
+      <th th:text="${el.Q_BBBBK}"></th>
+      <th th:text="${el.Q_KKK}"></th>
+      <th th:text="${el.G_BBBBK}"></th>
+      <th th:text="${el.G_KKK}"></th>
+      <th th:text="${el.R_BBBBK_05}"></th>
+      <th th:text="${el.R_KKK_05}"></th>
+      <th th:text="${el.D_BBBBK_033}"></th>
+      <th th:text="${el.D_KKK_033}"></th>
+      <th th:text="${el.BBBBK_F_025}"></th>
+      <th th:text="${el.KKK_F_025}"></th>
+      <th th:text="${el.E_GG_2_006_N_BBBBK_25}"></th>
+      <th th:text="${el.E_2_GGK_006_N_KKK_25}"></th>
+      <th th:text="${el.all}"></th>
+      <th th:text="${el.all2}"></th>
+      <th th:text="${el.obsyag}"></th>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<script>
+  $(document).ready(function(){
+    $("#Input1").on("keyup", function() {
+      var value = $(this).val().toLowerCase();
+      $("#Table1 tr").filter(function() {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+      });
+    });
+  });
+
+  $(document).ready(function(){
+    $("#Input2").on("keyup", function() {
+      var value = $(this).val().toLowerCase();
+      $("#Table2 tr").filter(function() {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+      });
+    });
+  });
+</script>
+</body>
+</html>
+
+
