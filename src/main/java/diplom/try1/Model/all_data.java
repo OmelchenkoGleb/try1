@@ -138,8 +138,6 @@ public class all_data {
     private double all2;
     @Column(name = "Обсяг дисциплін за семестр")
     private double obsyag;
-    @Column(name = "Викладач")
-    private String nameV;
 
     @Override
     public String toString() {
@@ -201,7 +199,13 @@ public class all_data {
                 ", all=" + all +
                 ", all2=" + all2 +
                 ", obsyag=" + obsyag +
+                ", teachers=" + teachers +
                 '}';
     }
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "teachers_id")
+    private Teachers teachers;
+
 
 }
