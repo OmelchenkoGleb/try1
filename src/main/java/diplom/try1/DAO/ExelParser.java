@@ -1,5 +1,6 @@
 package diplom.try1.DAO;
 
+import diplom.try1.Model.Teachers;
 import diplom.try1.Model.all_data;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
@@ -92,6 +93,77 @@ public class ExelParser {
         }
 
         return null;
+    }
+
+    public ArrayList<Teachers> parsertecher(MultipartFile multipartFile){
+        InputStream inputStream = null;
+        HSSFWorkbook workbook = null;
+
+        Class<Teachers> TeachersClass = Teachers.class;
+        ArrayList<Teachers> datalist = new ArrayList<>();
+        File convFile = new File(Objects.requireNonNull(multipartFile.getOriginalFilename()));
+        try {
+            if(convFile.createNewFile()) {
+                FileOutputStream fos = new FileOutputStream(convFile);
+                fos.write(multipartFile.getBytes());
+                fos.close();
+                try {
+                    inputStream = new FileInputStream(convFile);
+                    workbook = new HSSFWorkbook(inputStream);
+                    Sheet sheet = workbook.getSheetAt(0);
+                    Iterator<Row> it = sheet.iterator();
+
+                    it.next();
+
+                    while (it.hasNext()) {
+                        Row row = it.next();
+                        Iterator<Cell> cells = row.iterator();
+
+
+
+
+                        int i = 0;
+                        Teachers obj = new Teachers();
+                        Field[] declaredFields = TeachersClass.getDeclaredFields();
+                        while (cells.hasNext()) {
+                            Cell cell = cells.next();
+                            declaredFields[i+1].setAccessible(true);
+                            if (i == 3) {
+                                declaredFields[i+1].set(obj,cell.getNumericCellValue());
+                            } else {
+                                declaredFields[i+1].set(obj,cell.getStringCellValue());
+                            }
+
+
+
+                            i++;
+                        }
+                        datalist.add(obj);
+//                        break; // 1 запись тестим
+                    }
+
+                } catch (IOException | IllegalAccessException e) {
+                    System.out.println("try2");
+                    e.printStackTrace();
+                }
+                if(convFile.delete()){
+                    System.out.println("Файл был удален с корневой папки проекта");
+                    return datalist;
+                }else {
+                    System.out.println("Файл не был найден в корневой папке проекта");
+                    return null;
+                }
+            } else {
+                System.out.println("Файл существует");
+                return null;
+            }
+        } catch (IOException e) {
+            System.out.println("try1");
+            convFile = null;
+        }
+
+        return null;
+
     }
 
 }

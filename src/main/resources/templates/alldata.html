@@ -26,9 +26,18 @@
       margin-right: auto;
       width: 30em;
     }
+
+    body{
+      background-color: rgba(0, 0, 0, 0.76);
+    }
   </style>
 </head>
 <body>
+
+<div th:if="${accept}"  class="alert alert-success" role="alert">
+  <p th:text="${accept}"></p>
+</div>
+
 
 <div class="pos-f-t">
   <div class="collapse" id="navbarToggleExternalContent">
@@ -40,13 +49,14 @@
             <a class="navbar-brand" href="#">Сформувати персональні плани для Викладачів</a>
           </div>
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Переглянути усі дані</a></li>
-            <li><a href="#">Переглянути дані де нема викладача</a></li>
-            <li><a href="#">Переглянути таблицю з викладачами</a></li>
+            <li><a href="#">Переглянути дані по викладачам</a></li>
+            <li class="active"><a href="#">Переглянути дані де нема викладача</a></li>
+            <li><a href="/teachers">Переглянути таблицю з викладачами</a></li>
+            <li><a href="#">Отримати звіти для даних</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#" >Загрузити дані</a></li>
-            <li><a href="#" class="btn btn-danger navbar-btn">Видалити усі дані</a></li>
+            <li><a href="/add" >Загрузити дані</a></li>
+            <li><a href="#" class="btn btn-danger navbar-btn">Видалити дані</a></li>
           </ul>
         </div>
       </nav>
@@ -128,12 +138,13 @@
       <th>Всього годин</th>
       <th>Всього годин</th>
       <th>Обсяг дисципліни за семестр, N годин</th>
+
     </tr>
     </thead>
     <tbody id="Table1">
     <tr th:each="el : ${data1}">
       <th th:text="${el.name}"></th>
-      <th th:text="${el.nameV}"></th>
+      <th><a th:href="@{'/setteacher/{id}/{name}'(id=${el.id}, name=${el.name})}">Обрати викладача</a></th>
       <th th:text="${el.N}"></th>
       <th th:text="${el.LL}"></th>
       <th th:text="${el.PP}"></th>
@@ -264,7 +275,7 @@
     <tbody id="Table2">
     <tr th:each="el : ${data2}">
       <th th:text="${el.name}"></th>
-      <th th:text="${el.nameV}"></th>
+      <th><a th:href="@{'/setteacher/{id}'(id=${el.id})}">Обрати викладача</a></th>
       <th th:text="${el.N}"></th>
       <th th:text="${el.LL}"></th>
       <th th:text="${el.PP}"></th>
