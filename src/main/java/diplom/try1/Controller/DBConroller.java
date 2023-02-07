@@ -35,8 +35,10 @@ public class DBConroller {
 
     @PostMapping("/sett")
     public String setteacher(@RequestParam Long choose, @RequestParam Long idalldate, Model model){
-        System.out.println(choose+"   "+idalldate);
+        bdDAO.updateAllData(idalldate,choose);
         model.addAttribute("accept","Дані успішно додані");
+        model.addAttribute("data1", bdDAO.getSemestrAndNullTeacher(null, 1));
+        model.addAttribute("data2", bdDAO.getSemestrAndNullTeacher(null,2));
         return "/alldata";
     }
 

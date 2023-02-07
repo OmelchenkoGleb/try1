@@ -34,4 +34,10 @@ public class BdDAO {
 
     public Iterable getTeachers(){return crudTeachers.findAll();}
 
+    public void updateAllData(Long idalldate, Long idteachers) {
+        all_data allData = crudAllData.findById(idalldate).get();
+        Teachers teacher = crudTeachers.findById(idteachers).get();
+        allData.setTeachers(teacher);
+        crudAllData.save(allData);
+    }
 }

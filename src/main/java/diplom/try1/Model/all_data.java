@@ -139,6 +139,8 @@ public class all_data {
     @Column(name = "Обсяг дисциплін за семестр")
     private double obsyag;
 
+
+
     @Override
     public String toString() {
         return "all_data{" +
