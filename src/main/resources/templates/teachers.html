@@ -55,7 +55,7 @@
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li><a href="/add" >Загрузити дані</a></li>
-            <li><a href="#" class="btn btn-danger navbar-btn">Видалити дані</a></li>
+            <li><a href="/all_delete" class="btn btn-danger navbar-btn">Видалити дані</a></li>
           </ul>
         </div>
       </nav>
@@ -84,6 +84,8 @@
       <th>email</th>
       <th>Посада</th>
       <th>Ставка</th>
+      <th></th>
+      <th></th>
     </tr>
     </thead>
     <tbody id="Table1">
@@ -92,6 +94,8 @@
       <th th:text="${el.email}"></th>
       <th th:text="${el.jobtitle}"></th>
       <th th:text="${el.bid}"></th>
+      <th><a th:href="@{'/updateOneTeacher/{id}'(id=${el.id})}">Редагувати</a></th>
+      <th><a th:href="@{'/deleteOneTeacher/{id}'(id=${el.id})}">Видалити</a></th>
     </tr>
     </tbody>
   </table>

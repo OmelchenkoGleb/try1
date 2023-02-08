@@ -40,4 +40,28 @@ public class BdDAO {
         allData.setTeachers(teacher);
         crudAllData.save(allData);
     }
+
+    public void deleteAllData() {
+        crudAllData.deleteAll();
+    }
+
+    public void deleteAllTeachers() {
+        crudTeachers.deleteAll();
+    }
+
+    public void deleteOneData(Long id) {
+        crudAllData.deleteById(id);
+    }
+
+    public void deleteOneTeacher(Long id) {
+        crudTeachers.deleteById(id);
+    }
+
+    public Teachers findOneTeacher(Long id) {
+        return crudTeachers.findById(id).get();
+    }
+
+    public all_data findOneData(Long id) {
+        return crudAllData.findById(id).get();
+    }
 }

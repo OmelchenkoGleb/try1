@@ -56,7 +56,7 @@
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li><a href="/add" >Загрузити дані</a></li>
-            <li><a href="#" class="btn btn-danger navbar-btn">Видалити дані</a></li>
+            <li><a href="/all_delete" class="btn btn-danger navbar-btn">Видалити дані</a></li>
           </ul>
         </div>
       </nav>
@@ -138,9 +138,11 @@
       <th>Всього годин</th>
       <th>Всього годин</th>
       <th>Обсяг дисципліни за семестр, N годин</th>
-
+      <th></th>
+      <th></th>
     </tr>
     </thead>
+
     <tbody id="Table1">
     <tr th:each="el : ${data1}">
       <th th:text="${el.name}"></th>
@@ -199,6 +201,8 @@
       <th th:text="${el.all}"></th>
       <th th:text="${el.all2}"></th>
       <th th:text="${el.obsyag}"></th>
+      <th><a th:href="@{'/updateOneData/{id}'(id=${el.id})}">Редагувати</a></th>
+      <th><a th:href="@{'/deleteOneData/{id}'(id=${el.id})}">Видалити</a></th>
     </tr>
     </tbody>
   </table>
@@ -270,6 +274,8 @@
       <th>Всього годин</th>
       <th>Всього годин</th>
       <th>Обсяг дисципліни за семестр, N годин</th>
+      <th></th>
+      <th></th>
     </tr>
     </thead>
     <tbody id="Table2">
@@ -330,6 +336,8 @@
       <th th:text="${el.all}"></th>
       <th th:text="${el.all2}"></th>
       <th th:text="${el.obsyag}"></th>
+      <th><a th:href="@{'/updateOneData/{id}'(id=${el.id})}">Редагувати</a></th>
+      <th><a th:href="@{'/deleteOneData/{id}'(id=${el.id})}">Видалити</a></th>
     </tr>
     </tbody>
   </table>
