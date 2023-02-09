@@ -8,6 +8,7 @@
 </head>
 <body>
     <form class="form-inline" action="/updateOneTeacher" method="post">
+        <input type="hidden" name="id" th:value="${teacher.getId()}">
         <div class="input-group">
             <span class="input-group-text">Ім'я та прізвищеe</span>
             <input type="text" th:value="${teacher.getName()}" class="form-control" name="name">
@@ -18,11 +19,11 @@
         </div>
         <div class="input-group">
             <span class="input-group-text">Посада</span>
-            <input type="text" th:value="${teacher.getJobtitle()}" class="form-control" name="title">
+            <input type="text" th:value="${teacher.getJobtitle()}" class="form-control" name="jobtitle">
         </div>
         <div class="input-group">
             <span class="input-group-text">Доля ставки</span>
-            <input type="number" th:value="${teacher.getBid()}" class="form-control" name="bid">
+            <input type="number" th:value="${teacher.getBid()}" class="form-control" name="bid" step="0.01">
         </div>
         <button type="submit" class="btn btn-primary mb-2">Змінити дані</button>
     </form>

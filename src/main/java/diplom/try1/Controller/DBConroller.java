@@ -68,6 +68,15 @@ public class DBConroller {
         return "/updatealldata";
     }
 
+    @PostMapping("/updateOneData")
+    public String updateOneDataa(@ModelAttribute all_data allData, Model model){
+        bdDAO.updateOneData(allData);
+        model.addAttribute("accept","Дані успішно змінені");
+        model.addAttribute("data1", bdDAO.getSemestrAndNullTeacher(null, 1));
+        model.addAttribute("data2", bdDAO.getSemestrAndNullTeacher(null,2));
+        return "/alldata";
+    }
+
     @GetMapping("/deleteOneData/{id}")
     public String deleteOneData(@PathVariable(value = "id") Long id, Model model){
         System.out.println("222222222222");
@@ -87,7 +96,7 @@ public class DBConroller {
 
     @PostMapping("/updateOneTeacher")
     public String updateOneTeacherr(@ModelAttribute Teachers teachers, Model model){
-        System.out.println(teachers);
+        bdDAO.updateTeacher(teachers);
         model.addAttribute("accept","Дані успішно змінені");
         model.addAttribute("data", bdDAO.getTeachers());
         return "/teachers";

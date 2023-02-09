@@ -64,4 +64,13 @@ public class BdDAO {
     public all_data findOneData(Long id) {
         return crudAllData.findById(id).get();
     }
+
+    public void updateTeacher(Teachers teachers) {
+        crudTeachers.save(teachers);
+    }
+
+    public void updateOneData(all_data allData) {
+        System.out.println(allData);
+        crudAllData.save(allData);
+    }
 }
