@@ -32,6 +32,9 @@ public class BdDAO {
 
     public Iterable getSemestrAndNullTeacher(Teachers teacher, double semestr){return crudAllData.findAllByTeachersAndSemestr(teacher,semestr);}
 
+    public Iterable getSemestrAndTeacher(Long teacher, double semestr){return crudAllData.findAllByTeachersAndSemestr(crudTeachers.findById(teacher).get(),semestr);}
+
+
     public Iterable getTeachers(){return crudTeachers.findAll();}
 
     public void updateAllData(Long idalldate, Long idteachers) {
@@ -69,8 +72,9 @@ public class BdDAO {
         crudTeachers.save(teachers);
     }
 
-    public void updateOneData(all_data allData) {
-        System.out.println(allData);
+    public void updateOneData(all_data allData, Long idteachers) {
+        Teachers teacher = crudTeachers.findById(idteachers).get();
+        allData.setTeachers(teacher);
         crudAllData.save(allData);
     }
 }

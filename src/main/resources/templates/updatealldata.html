@@ -233,7 +233,12 @@
         <span class="input-group-text">Обсяг дисциплін за семестр</span>
         <input type="number" th:value="${allData.getObsyag()}" class="form-control" name="obsyag" step="0.01">
     </div>
-
+    <div class="form-group mx-sm-3 mb-2">
+        <label for="select" class="sr-only">Викладач</label>
+        <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" id="select" name="choose">
+            <option th:each="el : ${data}" th:text="${el.name}" th:value="${el.id}" name="choose"></option>
+        </select>
+    </div>
     <button type="submit" class="btn btn-primary mb-2">Змінити дані</button>
 </form>
 </body>

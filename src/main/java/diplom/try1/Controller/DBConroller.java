@@ -65,12 +65,13 @@ public class DBConroller {
     public String updateOneData(@PathVariable(value = "id") Long id, Model model){
         all_data allData = bdDAO.findOneData(id);
         model.addAttribute("allData", allData);
+        model.addAttribute("data", bdDAO.getTeachers());
         return "/updatealldata";
     }
 
     @PostMapping("/updateOneData")
-    public String updateOneDataa(@ModelAttribute all_data allData, Model model){
-        bdDAO.updateOneData(allData);
+    public String updateOneDataa(@ModelAttribute all_data allData, @RequestParam Long choose, Model model){
+        bdDAO.updateOneData(allData, choose);
         model.addAttribute("accept","Дані успішно змінені");
         model.addAttribute("data1", bdDAO.getSemestrAndNullTeacher(null, 1));
         model.addAttribute("data2", bdDAO.getSemestrAndNullTeacher(null,2));
@@ -109,6 +110,32 @@ public class DBConroller {
         model.addAttribute("accept","Дані успішно видалені");
         model.addAttribute("data", bdDAO.getTeachers());
         return "/teachers";
+    }
+
+
+    @GetMapping("/choose")
+    public String choose(Model model){
+        model.addAttribute("data", bdDAO.getTeachers());
+        return "/choose";
+    }
+    @PostMapping("/onedata")
+    public String onedata(@RequestParam Long choose,Model model){
+        model.addAttribute("data1", bdDAO.getSemestrAndTeacher(choose, 1));
+        model.addAttribute("data2", bdDAO.getSemestrAndTeacher(choose,2));
+        model.addAttribute("teacher", bdDAO.findOneTeacher(choose));
+        return "/onedata";
+    }
+
+    @GetMapping("/download")
+    public String download(Model model){
+        model.addAttribute("data", bdDAO.getTeachers());
+        return "/download";
+    }
+
+    @PostMapping("/download")
+    public String download(@RequestParam Long choose, @RequestParam String comp, @RequestParam String mail,Model model){
+        model.addAttribute("data", bdDAO.getTeachers());
+        return "/download";
     }
 
 }

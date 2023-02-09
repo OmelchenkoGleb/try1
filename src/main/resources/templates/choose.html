@@ -1,0 +1,19 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+<form class="form-inline" action="/onedata" method="post">
+  <div class="form-group mx-sm-3 mb-2">
+    <label for="select" class="sr-only">Викладач</label>
+    <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" id="select" name="choose">
+      <option th:each="el : ${data}" th:text="${el.name}" th:value="${el.id}" name="choose"></option>
+    </select>
+  </div>
+  <button type="submit" class="btn btn-primary mb-2">Передивитись дані прив'язані до цього викладача</button>
+</form>
+</body>
+</html>
