@@ -32,6 +32,49 @@ public class BdDAO {
 
     public Iterable getSemestrAndNullTeacher(Teachers teacher, double semestr){return crudAllData.findAllByTeachersAndSemestr(teacher,semestr);}
 
+    public Iterable getSemestrAndTeacher(Long teacher, double semestr){return crudAllData.findAllByTeachersAndSemestr(crudTeachers.findById(teacher).get(),semestr);}
+
+
     public Iterable getTeachers(){return crudTeachers.findAll();}
 
+    public void updateAllData(Long idalldate, Long idteachers) {
+        all_data allData = crudAllData.findById(idalldate).get();
+        Teachers teacher = crudTeachers.findById(idteachers).get();
+        allData.setTeachers(teacher);
+        crudAllData.save(allData);
+    }
+
+    public void deleteAllData() {
+        crudAllData.deleteAll();
+    }
+
+    public void deleteAllTeachers() {
+        crudTeachers.deleteAll();
+    }
+
+    public void deleteOneData(Long id) {
+        crudAllData.deleteById(id);
+    }
+
+    public void deleteOneTeacher(Long id) {
+        crudTeachers.deleteById(id);
+    }
+
+    public Teachers findOneTeacher(Long id) {
+        return crudTeachers.findById(id).get();
+    }
+
+    public all_data findOneData(Long id) {
+        return crudAllData.findById(id).get();
+    }
+
+    public void updateTeacher(Teachers teachers) {
+        crudTeachers.save(teachers);
+    }
+
+    public void updateOneData(all_data allData, Long idteachers) {
+        Teachers teacher = crudTeachers.findById(idteachers).get();
+        allData.setTeachers(teacher);
+        crudAllData.save(allData);
+    }
 }

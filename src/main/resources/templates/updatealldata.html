@@ -1,0 +1,245 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+<form class="form-inline" action="/updateOneData" method="post">
+    <input type="hidden" name="id" th:value="${allData.getId()}">
+    <div class="input-group">
+        <span class="input-group-text">Факультет(ін-т). Назва  дисципліни, іі загальний обсяг в годинах. Курс навчання, шифр груп, к-сть студентів в кожній групі (Б+К)</span>
+        <input type="text" th:value="${allData.getName()}" class="form-control" name="name">
+    </div>
+    <div class="input-group">
+        <span class="input-group-text">Семестр</span>
+        <input type="number" th:value="${allData.getSemestr()}" class="form-control" name="semestr" min="1" max="2">
+    </div>
+    <div class="input-group">
+        <span class="input-group-text">Обсяг дисципліни за семестр</span>
+        <input type="number" th:value="${allData.getN()}" class="form-control" name="N" step="0.01">
+    </div>
+    <div class="input-group">
+        <span class="input-group-text">Лекції</span>
+        <input type="number" th:value="${allData.getLL()}" class="form-control" name="LL" step="0.01">
+    </div>
+    <div class="input-group">
+        <span class="input-group-text">Практ</span>
+        <input type="number" th:value="${allData.getPP()}" class="form-control" name="PP" step="0.01">
+    </div>
+    <div class="input-group">
+        <span class="input-group-text">Лабор</span>
+        <input type="number" th:value="${allData.getL()}" class="form-control" name="L" step="0.01">
+    </div>
+    <div class="input-group">
+        <span class="input-group-text">Індивідуальні заняття</span>
+        <input type="number" th:value="${allData.getI()}" class="form-control" name="I" step="0.01">
+    </div>
+    <div class="input-group">
+        <span class="input-group-text">Екзамени</span>
+        <input type="number" th:value="${allData.getE()}" class="form-control" name="E" step="0.01">
+    </div>
+    <div class="input-group">
+        <span class="input-group-text">Заліки</span>
+        <input type="number" th:value="${allData.getZ()}" class="form-control" name="Z" step="0.01">
+    </div>
+    <div class="input-group">
+        <span class="input-group-text">Контр.роб</span>
+        <input type="number" th:value="${allData.getM()}" class="form-control" name="M" step="0.01">
+    </div>
+    <div class="input-group">
+        <span class="input-group-text">Курсові проекти</span>
+        <input type="number" th:value="${allData.getQ()}" class="form-control" name="Q" step="0.01">
+    </div>
+    <div class="input-group">
+        <span class="input-group-text">Курсові роботи</span>
+        <input type="number" th:value="${allData.getG()}" class="form-control" name="G" step="0.01">
+    </div>
+    <div class="input-group">
+        <span class="input-group-text">РГР, РР, ГР,</span>
+        <input type="number" th:value="${allData.getR()}" class="form-control" name="R" step="0.01">
+    </div>
+    <div class="input-group">
+        <span class="input-group-text">ДКР</span>
+        <input type="number" th:value="${allData.getD()}" class="form-control" name="D" step="0.01">
+    </div>
+    <div class="input-group">
+        <span class="input-group-text">Реферати</span>
+        <input type="number" th:value="${allData.getF()}" class="form-control" name="F" step="0.01">
+    </div>
+    <div class="input-group">
+        <span class="input-group-text">Академічні бюдж</span>
+        <input type="number" th:value="${allData.getGG()}" class="form-control" name="GG" step="0.01">
+    </div>
+    <div class="input-group">
+        <span class="input-group-text">Підгрупи для ПЗ</span>
+        <input type="number" th:value="${allData.getGGPP()}" class="form-control" name="GGPP" step="0.01">
+    </div>
+    <div class="input-group">
+        <span class="input-group-text">Підгр. для лаб.роб</span>
+        <input type="number" th:value="${allData.getGGL()}" class="form-control" name="GGL" step="0.01">
+    </div>
+    <div class="input-group">
+        <span class="input-group-text">Академ. контрактні</span>
+        <input type="number" th:value="${allData.getGGk()}" class="form-control" name="GGk" step="0.01">
+    </div>
+    <div class="input-group">
+        <span class="input-group-text">Підгрупи для ПЗ</span>
+        <input type="number" th:value="${allData.getGGKPP()}" class="form-control" name="GGKPP" step="0.01">
+    </div>
+    <div class="input-group">
+        <span class="input-group-text">Підгр. для лаб.роб</span>
+        <input type="number" th:value="${allData.getGGKL()}" class="form-control" name="GGKL" step="0.01">
+    </div>
+    <div class="input-group">
+        <span class="input-group-text">Б</span>
+        <input type="number" th:value="${allData.getBB()}" class="form-control" name="BB" step="0.01">
+    </div>
+    <div class="input-group">
+        <span class="input-group-text">К</span>
+        <input type="number" th:value="${allData.getK()}" class="form-control" name="K" step="0.01">
+    </div>
+    <div class="input-group">
+        <span class="input-group-text">БК</span>
+        <input type="number" th:value="${allData.getBBk()}" class="form-control" name="BBk" step="0.01">
+    </div>
+    <div class="input-group">
+        <span class="input-group-text">КК</span>
+        <input type="number" th:value="${allData.getKK()}" class="form-control" name="KK" step="0.01">
+    </div>
+    <div class="input-group">
+        <span class="input-group-text">Кількість бюджетних потоків</span>
+        <input type="number" th:value="${allData.getP()}" class="form-control" name="P" step="0.01">
+    </div>
+    <div class="input-group">
+        <span class="input-group-text">Кількість контрактних потоків</span>
+        <input type="number" th:value="${allData.getPK()}" class="form-control" name="PK" step="0.01">
+    </div>
+    <div class="input-group">
+        <span class="input-group-text">Лекції, Л х Р</span>
+        <input type="number" th:value="${allData.getLL_P()}" class="form-control" name="LL_P" step="0.01">
+    </div>
+    <div class="input-group">
+        <span class="input-group-text">Лекції, Л х РК</span>
+        <input type="number" th:value="${allData.getLL_PK()}" class="form-control" name="LL_PK" step="0.01">
+    </div>
+    <div class="input-group">
+        <span class="input-group-text">Практ.заняття (комп. практикум, семінари), П х ГП семінари), П х ГП</span>
+        <input type="number" th:value="${allData.getPP_GGPP()}" class="form-control" name="PP_GGPP" step="0.01">
+    </div>
+    <div class="input-group">
+        <span class="input-group-text">Практ.заняття (семінари), П х ГКП</span>
+        <input type="number" th:value="${allData.getPP_GGKPP()}" class="form-control" name="PP_GGKPP" step="0.01">
+    </div>
+    <div class="input-group">
+        <span class="input-group-text">Лаб.заняття(комп"ют.практик.), L х ГL</span>
+        <input type="number" th:value="${allData.getL_GGL()}" class="form-control" name="L_GGL" step="0.01">
+    </div>
+    <div class="input-group">
+        <span class="input-group-text">Лаб.заняття(комп"ют.практик.), L х ГКL</span>
+        <input type="number" th:value="${allData.getL_GGKL()}" class="form-control" name="L_GGKL" step="0.01">
+    </div>
+    <div class="input-group">
+        <span class="input-group-text">Індивідуальні заняття ІхГх0,25</span>
+        <input type="number" th:value="${allData.getI_GG_025()}" class="form-control" name="I_GG_025" step="0.01">
+    </div>
+    <div class="input-group">
+        <span class="input-group-text">Індивідуальні заняття ІхГх0,26</span>
+        <input type="number" th:value="${allData.getI_GG_026()}" class="form-control" name="I_GG_026" step="0.01">
+    </div>
+    <div class="input-group">
+        <span class="input-group-text">Екзамени, 0.33хEx(Б+БК)</span>
+        <input type="number" th:value="${allData.getE_BBBBK_033()}" class="form-control" name="E_BBBBK_033" step="0.01">
+    </div>
+    <div class="input-group">
+        <span class="input-group-text">Екзамени, 0.33хEx(К+КК)</span>
+        <input type="number" th:value="${allData.getE_KKK_033()}" class="form-control" name="E_KKK_033" step="0.01">
+    </div>
+    <div class="input-group">
+        <span class="input-group-text">Заліки, 2хГхZ</span>
+        <input type="number" th:value="${allData.getZaliki()}" class="form-control" name="zaliki" step="0.01">
+    </div>
+    <div class="input-group">
+        <span class="input-group-text">Заліки, 2хГхZ</span>
+        <input type="number" th:value="${allData.getGG_Z_2()}" class="form-control" name="GG_Z_2" step="0.01">
+    </div>
+    <div class="input-group">
+        <span class="input-group-text">Контр.роб.(мод.,темат.), 0.25хМх(Б+БК)</span>
+        <input type="number" th:value="${allData.getM_025_BBBBK()}" class="form-control" name="M_025_BBBBK" step="0.01">
+    </div>
+    <div class="input-group">
+        <span class="input-group-text">Контр.роб.(мод.,темат.), 0.25хМх(К+КК)</span>
+        <input type="number" th:value="${allData.getM_025_KKK()}" class="form-control" name="M_025_KKK" step="0.01">
+    </div>
+    <div class="input-group">
+        <span class="input-group-text">Курсові проекти, Qх(Б+БК)</span>
+        <input type="number" th:value="${allData.getQ_BBBBK()}" class="form-control" name="Q_BBBBK" step="0.01">
+    </div>
+    <div class="input-group">
+        <span class="input-group-text">Курсові проекти, Qх(К+КК)</span>
+        <input type="number" th:value="${allData.getQ_KKK()}" class="form-control" name="Q_KKK" step="0.01">
+    </div>
+    <div class="input-group">
+        <span class="input-group-text">Курсові роботи, Gх(Б+БК)</span>
+        <input type="number" th:value="${allData.getG_BBBBK()}" class="form-control" name="G_BBBBK" step="0.01">
+    </div>
+    <div class="input-group">
+        <span class="input-group-text">Курсові роботи, Gх(К+КК</span>
+        <input type="number" th:value="${allData.getG_KKK()}" class="form-control" name="G_KKK" step="0.01">
+    </div>
+    <div class="input-group">
+        <span class="input-group-text">РГР, РР, ГР,  0.5хRх(Б+БК)</span>
+        <input type="number" th:value="${allData.getR_BBBBK_05()}" class="form-control" name="R_BBBBK_05" step="0.01">
+    </div>
+    <div class="input-group">
+        <span class="input-group-text">РГР, РР, ГР,  0.5хRх(К+КК)</span>
+        <input type="number" th:value="${allData.getR_KKK_05()}" class="form-control" name="R_KKK_05" step="0.01">
+    </div>
+    <div class="input-group">
+        <span class="input-group-text">ДКР, 0.33хDх(Б+БК)</span>
+        <input type="number" th:value="${allData.getD_BBBBK_033()}" class="form-control" name="D_BBBBK_033" step="0.01">
+    </div>
+    <div class="input-group">
+        <span class="input-group-text">ДКР, 0.33хDх(К+КК)</span>
+        <input type="number" th:value="${allData.getD_KKK_033()}" class="form-control" name="D_KKK_033" step="0.01">
+    </div>
+    <div class="input-group">
+        <span class="input-group-text">Реферати, 0.25хFх(Б+БК)</span>
+        <input type="number" th:value="${allData.getBBBBK_F_025()}" class="form-control" name="BBBBK_F_025" step="0.01">
+    </div>
+    <div class="input-group">
+        <span class="input-group-text">Реферати, 0.25хFх(К+КК)</span>
+        <input type="number" th:value="${allData.getKKK_F_025()}" class="form-control" name="KKK_F_025" step="0.01">
+    </div>
+    <div class="input-group">
+        <span class="input-group-text">Консультації, 2 х E х Г + 0,06 х N х (Б+БК)/25</span>
+        <input type="number" th:value="${allData.getE_GG_2_006_N_BBBBK_25()}" class="form-control" name="E_GG_2_006_N_BBBBK_25" step="0.01">
+    </div>
+    <div class="input-group">
+        <span class="input-group-text">Консультації, 2хЕхГК+0,06хNх(К+КК)/25</span>
+        <input type="number" th:value="${allData.getE_2_GGK_006_N_KKK_25()}" class="form-control" name="E_2_GGK_006_N_KKK_25" step="0.01">
+    </div>
+    <div class="input-group">
+        <span class="input-group-text">Всього годин</span>
+        <input type="number" th:value="${allData.getAll()}" class="form-control" name="all" step="0.01">
+    </div>
+    <div class="input-group">
+        <span class="input-group-text">Всього годин</span>
+        <input type="number" th:value="${allData.getAll2()}" class="form-control" name="all2" step="0.01">
+    </div>
+    <div class="input-group">
+        <span class="input-group-text">Обсяг дисциплін за семестр</span>
+        <input type="number" th:value="${allData.getObsyag()}" class="form-control" name="obsyag" step="0.01">
+    </div>
+    <div class="form-group mx-sm-3 mb-2">
+        <label for="select" class="sr-only">Викладач</label>
+        <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" id="select" name="choose">
+            <option th:each="el : ${data}" th:text="${el.name}" th:value="${el.id}" name="choose"></option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary mb-2">Змінити дані</button>
+</form>
+</body>
+</html>

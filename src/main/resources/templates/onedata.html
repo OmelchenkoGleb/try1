@@ -49,8 +49,8 @@
             <a class="navbar-brand" href="/download">Сформувати персональні плани для Викладачів</a>
           </div>
           <ul class="nav navbar-nav">
-            <li><a href="/choose">Переглянути дані по викладачам</a></li>
-            <li class="active"><a href="#">Переглянути дані де нема викладача</a></li>
+            <li class="active"><a href="/choose">Переглянути дані по викладачам</a></li>
+            <li><a href="/alldata">Переглянути дані де нема викладача</a></li>
             <li><a href="/teachers">Переглянути таблицю з викладачами</a></li>
             <li><a href="#">Отримати звіти для даних</a></li>
           </ul>
@@ -58,6 +58,7 @@
             <li><a href="/add" >Загрузити дані</a></li>
             <li><a href="/all_delete" class="btn btn-danger navbar-btn">Видалити дані</a></li>
           </ul>
+
         </div>
       </nav>
 
@@ -72,10 +73,11 @@
   </nav>
 </div>
 
-
 <div class="jumbotron text-center">
+  <h1 th:text="${teacher.getName()}"></h1>
   <h1>Перший семестр</h1>
 </div>
+
 <input class="form-control" id="Input1" type="text" placeholder="Ведіть інформацію по якій шукати для першого семестра..">
 <br>
 <div class="table-responsive-sm">
@@ -152,7 +154,7 @@
     <tbody id="Table1">
     <tr th:each="el : ${data1}">
       <th th:text="${el.name}"></th>
-      <th><a th:href="@{'/setteacher/{id}/{name}'(id=${el.id}, name=${el.name})}">Обрати викладача</a></th>
+      <th th:text="${el.teachers.name}"></th>
       <th th:text="${el.N}"></th>
       <th th:text="${el.LL}"></th>
       <th th:text="${el.PP}"></th>
@@ -289,7 +291,7 @@
     <tbody id="Table2">
     <tr th:each="el : ${data2}">
       <th th:text="${el.name}"></th>
-      <th><a th:href="@{'/setteacher/{id}'(id=${el.id})}">Обрати викладача</a></th>
+      <th th:text="${el.teachers.name}"></th>
       <th th:text="${el.N}"></th>
       <th th:text="${el.LL}"></th>
       <th th:text="${el.PP}"></th>

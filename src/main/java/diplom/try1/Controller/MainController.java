@@ -26,11 +26,10 @@ public class MainController {
         return "/addteachers";
     }
 
-    @GetMapping("/setteacher/{id}/{name}")
-    public String setteacher(@PathVariable(value = "id") Long id, @PathVariable(value = "name") String name, Model model){
-        model.addAttribute("alldataname", name);
-        model.addAttribute("alldataid", id);
-        model.addAttribute("data", bdDAO.getTeachers());
-        return "/setteacher";
+    @GetMapping("/all_delete")
+    public String all_delete(Model model){
+        return "/all_delete";
     }
+
+
 }

@@ -71,7 +71,6 @@ public class ExelParser {
                         datalist.add(obj);
 //                        break; // 1 запись тестим
                     }
-
                 } catch (IOException | IllegalAccessException e) {
                     System.out.println("try2");
                     e.printStackTrace();
@@ -112,16 +111,10 @@ public class ExelParser {
                     workbook = new HSSFWorkbook(inputStream);
                     Sheet sheet = workbook.getSheetAt(0);
                     Iterator<Row> it = sheet.iterator();
-
                     it.next();
-
                     while (it.hasNext()) {
                         Row row = it.next();
                         Iterator<Cell> cells = row.iterator();
-
-
-
-
                         int i = 0;
                         Teachers obj = new Teachers();
                         Field[] declaredFields = TeachersClass.getDeclaredFields();
@@ -133,15 +126,11 @@ public class ExelParser {
                             } else {
                                 declaredFields[i+1].set(obj,cell.getStringCellValue());
                             }
-
-
-
                             i++;
                         }
                         datalist.add(obj);
 //                        break; // 1 запись тестим
                     }
-
                 } catch (IOException | IllegalAccessException e) {
                     System.out.println("try2");
                     e.printStackTrace();
@@ -161,9 +150,7 @@ public class ExelParser {
             System.out.println("try1");
             convFile = null;
         }
-
         return null;
-
     }
 
 }

@@ -96,12 +96,17 @@ public class all_data {
     private double I_GG_025;
     @Column(name = "ІхГх0,26")
     private double I_GG_026;
+
+
     @Column(name = "0.33хEx(Б+БК)")
     private double E_BBBBK_033;
     @Column(name = "0.33хEx(К+КК)")
     private double E_KKK_033;
     @Column(name = "Заліки,+AL10")
     private double zaliki;
+
+
+
     @Column(name = "2хГхZ")
     private double GG_Z_2;
     @Column(name = "0.25хМх(Б+БК)")
@@ -138,6 +143,8 @@ public class all_data {
     private double all2;
     @Column(name = "Обсяг дисциплін за семестр")
     private double obsyag;
+
+
 
     @Override
     public String toString() {
