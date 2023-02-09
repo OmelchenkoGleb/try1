@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class DExel {
@@ -44,5 +45,30 @@ public class DExel {
         model.addAttribute("accept","Дані успішно додані");
         model.addAttribute("data", bdDAO.getTeachers());
         return "/teachers";
+    }
+
+    @PostMapping("/download")
+    public String download(@RequestParam Long choose, @RequestParam String download,Model model){
+        System.out.println(download + "   "+choose);
+
+        Teachers teacher = bdDAO.findOneTeacher(choose);
+        List<all_data> dataList1 = bdDAO.getSemestrAndTeacherList(choose,1);
+        List<all_data> dataList2 = bdDAO.getSemestrAndTeacherList(choose,2);
+
+        exelParser.download(teacher, dataList1, dataList2);
+
+//        dataList1.forEach(x-> System.out.println(x.getName()));
+//        dataList2.forEach(x-> System.out.println(x.getName()));
+
+//        InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
+//
+//        return ResponseEntity.ok()
+//                .headers(headers)
+//                .contentLength(file.length())
+//                .contentType(MediaType.APPLICATION_OCTET_STREAM)
+//                .body(resource);
+
+
+        return "/download";
     }
 }

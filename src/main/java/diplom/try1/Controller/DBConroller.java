@@ -132,10 +132,6 @@ public class DBConroller {
         return "/download";
     }
 
-    @PostMapping("/download")
-    public String download(@RequestParam Long choose, @RequestParam String comp, @RequestParam String mail,Model model){
-        model.addAttribute("data", bdDAO.getTeachers());
-        return "/download";
-    }
+
 
 }

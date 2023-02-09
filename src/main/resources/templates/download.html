@@ -13,17 +13,12 @@
                 <option th:each="el : ${data}" th:text="${el.name}" th:value="${el.id}" name="choose"></option>
             </select>
         </div>
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" name="comp" id="exampleRadios1" value="option1">
-          <label class="form-check-label" for="exampleRadios1">
-              Скачати на компьютер
-          </label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" name="mail" id="exampleRadios2" value="option2">
-          <label class="form-check-label" for="exampleRadios2">
-              Відправити викладачу на пошту
-          </label>
+        <div class="form-group mx-sm-3 mb-2">
+            <label for="select" class="sr-only">Спосіб закачки</label>
+            <select class="form-select" aria-label="Default select example" name="download">
+                <option selected value="1">Скачати на комп</option>
+                <option value="2">Відправити на пошту</option>
+            </select>
         </div>
         <button type="submit" class="btn btn-primary mb-2">Прив'язати викладача до предмету</button>
     </form>

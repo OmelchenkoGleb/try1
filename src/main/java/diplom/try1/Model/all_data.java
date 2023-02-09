@@ -145,7 +145,6 @@ public class all_data {
     private double obsyag;
 
 
-
     @Override
     public String toString() {
         return "all_data{" +

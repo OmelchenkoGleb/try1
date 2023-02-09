@@ -13,6 +13,7 @@ import java.io.*;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Objects;
 
 @Component
@@ -153,4 +154,7 @@ public class ExelParser {
         return null;
     }
 
+    public void download(Teachers teacher, List<all_data> dataList1, List<all_data> dataList2) {
+
+    }
 }
