@@ -5,14 +5,25 @@ import diplom.try1.DAO.BdDAO;
 import diplom.try1.DAO.ExelParser;
 import diplom.try1.Model.Teachers;
 import diplom.try1.Model.all_data;
+import diplom.try1.service.MailSender;
+import jakarta.mail.MessagingException;
+import jakarta.servlet.ServletOutputStream;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +36,8 @@ public class DExel {
     @Autowired
     BdDAO bdDAO;
 
+    @Autowired
+    private MailSender mailSender;
 
     @PostMapping("/load")
     public String load(Model model, @RequestParam MultipartFile file, @RequestParam int sem11,
@@ -48,7 +61,7 @@ public class DExel {
     }
 
     @PostMapping("/download")
-    public String download(@RequestParam Long choose, @RequestParam String download,Model model){
+    public void download(HttpServletResponse response, @RequestParam Long choose, @RequestParam String download, Model model) throws IOException, MessagingException {
         System.out.println(download + "   "+choose);
 
         Teachers teacher = bdDAO.findOneTeacher(choose);
@@ -68,7 +81,20 @@ public class DExel {
 //                .contentType(MediaType.APPLICATION_OCTET_STREAM)
 //                .body(resource);
 
+        File file = new File(teacher.getName() + ".xls");
+        response.setContentType("application/octet-stream");
 
-        return "/download";
+        response.setHeader("Content-Disposition", "attachment; filename=" + teacher.getName());
+        ServletOutputStream outputStream = response.getOutputStream();
+        BufferedInputStream inputStream = new BufferedInputStream(new FileInputStream(file));
+        byte[] buffer = new byte[8192];
+        int i = -1;
+        while ((i = inputStream.read(buffer)) != -1) {
+            outputStream.write(buffer, 0, i);
+        }
+        inputStream.close();
+        outputStream.close();
+        mailSender.sendMessageWithAttachment(teacher.getEmail(),"Сгенерований план", "Сгенерований план", file.getName());
+        file.delete();
     }
 }
