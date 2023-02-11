@@ -5,27 +5,42 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <style>
+        body{
+            background-color: rgba(185, 185, 185, 0.8);
+        }
+
+    </style>
 </head>
 <body>
-    <form class="form-inline" action="/updateOneTeacher" method="post">
-        <input type="hidden" name="id" th:value="${teacher.getId()}">
-        <div class="input-group">
-            <span class="input-group-text">Ім'я та прізвищеe</span>
-            <input type="text" th:value="${teacher.getName()}" class="form-control" name="name">
+    <div class="container mt-5 mb-5 d-flex justify-content-center">
+        <div class="card px-1 py-4">
+            <div class="card-body">
+                <form class="form-inline" action="/updateOneTeacher" method="post">
+                    <h6 class="card-title mb-3 container mt-1 mb-1 d-flex justify-content-center lead">Редагування</h6>
+                    <br>
+                    <input type="hidden" name="id" th:value="${teacher.getId()}">
+                    <div class="input-group">
+                        <span class="input-group-text">Ім'я та прізвищеe</span>
+                        <input type="text" th:value="${teacher.getName()}" class="form-control" name="name">
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-text">Email</span>
+                        <input type="email" th:value="${teacher.getEmail()}" class="form-control" name="email">
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-text">Посада</span>
+                        <input type="text" th:value="${teacher.getJobtitle()}" class="form-control" name="jobtitle">
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-text">Доля ставки</span>
+                        <input type="number" th:value="${teacher.getBid()}" class="form-control" name="bid" step="0.01">
+                    </div>
+                    <br>
+                    <button type="submit" class="btn btn-primary mb-2 container mt-2 mb-2 d-flex justify-content-center">Змінити дані</button>
+                </form>
+            </div>
         </div>
-        <div class="input-group">
-            <span class="input-group-text">Email</span>
-            <input type="text" th:value="${teacher.getEmail()}" class="form-control" name="email">
-        </div>
-        <div class="input-group">
-            <span class="input-group-text">Посада</span>
-            <input type="text" th:value="${teacher.getJobtitle()}" class="form-control" name="jobtitle">
-        </div>
-        <div class="input-group">
-            <span class="input-group-text">Доля ставки</span>
-            <input type="number" th:value="${teacher.getBid()}" class="form-control" name="bid" step="0.01">
-        </div>
-        <button type="submit" class="btn btn-primary mb-2">Змінити дані</button>
-    </form>
+    </div>
 </body>
 </html>

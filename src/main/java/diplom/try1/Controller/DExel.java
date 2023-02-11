@@ -26,6 +26,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Controller
 public class DExel {
@@ -62,39 +63,36 @@ public class DExel {
 
     @PostMapping("/download")
     public void download(HttpServletResponse response, @RequestParam Long choose, @RequestParam String download, Model model) throws IOException, MessagingException {
-        System.out.println(download + "   "+choose);
-
         Teachers teacher = bdDAO.findOneTeacher(choose);
         List<all_data> dataList1 = bdDAO.getSemestrAndTeacherList(choose,1);
         List<all_data> dataList2 = bdDAO.getSemestrAndTeacherList(choose,2);
-
         exelParser.download(teacher, dataList1, dataList2);
 
-//        dataList1.forEach(x-> System.out.println(x.getName()));
-//        dataList2.forEach(x-> System.out.println(x.getName()));
-
-//        InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
-//
-//        return ResponseEntity.ok()
-//                .headers(headers)
-//                .contentLength(file.length())
-//                .contentType(MediaType.APPLICATION_OCTET_STREAM)
-//                .body(resource);
-
         File file = new File(teacher.getName() + ".xls");
-        response.setContentType("application/octet-stream");
+        if (Objects.equals(download, "1")){
 
-        response.setHeader("Content-Disposition", "attachment; filename=" + teacher.getName());
-        ServletOutputStream outputStream = response.getOutputStream();
-        BufferedInputStream inputStream = new BufferedInputStream(new FileInputStream(file));
-        byte[] buffer = new byte[8192];
-        int i = -1;
-        while ((i = inputStream.read(buffer)) != -1) {
-            outputStream.write(buffer, 0, i);
+
+
+            response.setContentType("application/octet-stream");
+            response.setHeader("Content-Disposition", "attachment; filename=" + teacher.getName());
+            ServletOutputStream outputStream = response.getOutputStream();
+            BufferedInputStream inputStream = new BufferedInputStream(new FileInputStream(file));
+            byte[] buffer = new byte[1024];
+            int bytesRead = 0;
+            while ((bytesRead = inputStream.read(buffer)) != -1) {
+                outputStream.write(buffer, 0, bytesRead);
+            }
+            inputStream.close();
+            outputStream.close();
+
+
+
+
+        } else {
+            mailSender.sendMessageWithAttachment(teacher.getEmail(),"Сгенероване пед навантаження для "+teacher.getName(), "Прошу подивіться файл в закріплені для цього письма.\nЗ повагою Оксана Дацюк.", file.getName());
         }
-        inputStream.close();
-        outputStream.close();
-        mailSender.sendMessageWithAttachment(teacher.getEmail(),"Сгенерований план", "Сгенерований план", file.getName());
-        file.delete();
+        if(file.delete()){
+            System.out.println("Файл видалений");
+        }
     }
 }

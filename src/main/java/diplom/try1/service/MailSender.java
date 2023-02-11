@@ -28,8 +28,7 @@ public class MailSender{
         helper.setSubject(subject);
         helper.setText(text);
         FileSystemResource file = new FileSystemResource(new File(pathToAttachment));
-        helper.addAttachment("Invoice", file);
-
+        helper.addAttachment(pathToAttachment+".xls", file);
         emailSender.send(message);
     }
 }

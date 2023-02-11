@@ -56,9 +56,15 @@ public class DBConroller {
 
     @GetMapping("/all_deleteallteachers")
     public String all_deleteallteachers(Model model){
-        bdDAO.deleteAllTeachers();
-        model.addAttribute("accept","Дані успішно видалені");
-        return "/teachers";
+        try {
+            bdDAO.deleteAllTeachers();
+            model.addAttribute("accept","Дані успішно видалені");
+            return "/teachers";
+        } catch (Exception e){
+            model.addAttribute("fail","Невдалося видалити дані, бо викладач прив'язан до предмета якогось. Спочатку треба відв'язати.");
+            model.addAttribute("data", bdDAO.getTeachers());
+            return "/teachers";
+        }
     }
 
     @GetMapping("/updateOneData/{id}")
@@ -106,10 +112,16 @@ public class DBConroller {
 
     @GetMapping("/deleteOneTeacher/{id}")
     public String deleteOneTeacher(@PathVariable(value = "id") Long id, Model model){
-        bdDAO.deleteOneTeacher(id);
-        model.addAttribute("accept","Дані успішно видалені");
-        model.addAttribute("data", bdDAO.getTeachers());
-        return "/teachers";
+        try {
+            bdDAO.deleteOneTeacher(id);
+            model.addAttribute("accept","Дані успішно видалені");
+            model.addAttribute("data", bdDAO.getTeachers());
+            return "/teachers";
+        } catch (Exception e){
+            model.addAttribute("fail","Невдалося видалити дані, бо викладач прив'язан до предмета якогось. Спочатку треба відв'язати.");
+            model.addAttribute("data", bdDAO.getTeachers());
+            return "/teachers";
+        }
     }
 
 
