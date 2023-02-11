@@ -62,7 +62,7 @@ public class DExel {
     }
 
     @PostMapping("/download")
-    public void download(HttpServletResponse response, @RequestParam Long choose, @RequestParam String download, Model model) throws IOException, MessagingException {
+    public String download(HttpServletResponse response, @RequestParam Long choose, @RequestParam String download, Model model) throws IOException, MessagingException {
         Teachers teacher = bdDAO.findOneTeacher(choose);
         List<all_data> dataList1 = bdDAO.getSemestrAndTeacherList(choose,1);
         List<all_data> dataList2 = bdDAO.getSemestrAndTeacherList(choose,2);
@@ -85,14 +85,21 @@ public class DExel {
             inputStream.close();
             outputStream.close();
 
-
-
-
+            if(file.delete()){
+                System.out.println("Файл видалений");
+            }
+            model.addAttribute("data", bdDAO.getTeachers());
+            model.addAttribute("accept","Файл викачено успішно !");
+            return "/download";
         } else {
             mailSender.sendMessageWithAttachment(teacher.getEmail(),"Сгенероване пед навантаження для "+teacher.getName(), "Прошу подивіться файл в закріплені для цього письма.\nЗ повагою Оксана Дацюк.", file.getName());
+            if(file.delete()){
+                System.out.println("Файл видалений");
+            }
+            model.addAttribute("data", bdDAO.getTeachers());
+            model.addAttribute("accept","Файл викачено успішно !");
+            return "/download";
         }
-        if(file.delete()){
-            System.out.println("Файл видалений");
-        }
+
     }
 }
