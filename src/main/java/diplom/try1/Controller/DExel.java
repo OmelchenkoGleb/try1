@@ -69,10 +69,8 @@ public class DExel {
         exelParser.download(teacher, dataList1, dataList2);
 
         File file = new File(teacher.getName() + ".xls");
+
         if (Objects.equals(download, "1")){
-
-
-
             response.setContentType("application/octet-stream");
             response.setHeader("Content-Disposition", "attachment; filename=" + teacher.getName());
             ServletOutputStream outputStream = response.getOutputStream();
