@@ -44,7 +44,6 @@ public class Teachers {
                 ", email='" + email + '\'' +
                 ", jobtitle='" + jobtitle + '\'' +
                 ", bid=" + bid +
-                ", all_data=" + all_data +
                 '}';
     }
 

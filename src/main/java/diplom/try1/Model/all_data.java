@@ -205,7 +205,6 @@ public class all_data {
                 ", all=" + all +
                 ", all2=" + all2 +
                 ", obsyag=" + obsyag +
-                ", teachers=" + teachers +
                 '}';
     }
 
