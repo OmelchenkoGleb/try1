@@ -20,7 +20,6 @@ import java.util.Objects;
 
 @Component
 public class ExelParser {
-
     public ArrayList<all_data> parser(MultipartFile multipartFile, int sem11, int sem12, int sem21, int sem22){
         InputStream inputStream = null;
         HSSFWorkbook workbook = null;
@@ -92,10 +91,8 @@ public class ExelParser {
             System.out.println("try1");
             convFile = null;
         }
-
         return null;
     }
-
     public ArrayList<Teachers> parsertecher(MultipartFile multipartFile){
         InputStream inputStream = null;
         HSSFWorkbook workbook = null;
@@ -154,17 +151,13 @@ public class ExelParser {
         }
         return null;
     }
-
     public void download(Teachers teacher, List<all_data> dataList1, List<all_data> dataList2) throws IOException {
         InputStream inputStream = null;
         HSSFWorkbook workbook = null;
         Class<all_data> all_dataClass = all_data.class;
         Field[] declaredFields = all_dataClass.getDeclaredFields(); //  помощью рефлексии получаем поля класса
-
-
         File from = new File("SHABLON.xls");
         File to = new File(teacher.getName()+".xls");
-
         try {
             Files.copy(from.toPath(), to.toPath());
         } catch (Exception e){
@@ -172,29 +165,19 @@ public class ExelParser {
                 Files.copy(from.toPath(), to.toPath());
             }
         }
-
         int sem11 = 8;
         int sem21 = 115;
         int count = 0;
-
-
         try {
             inputStream = new FileInputStream(to);
             workbook = new HSSFWorkbook(inputStream);
             Sheet sheet = workbook.getSheetAt(0);
             Iterator<Row> it = sheet.iterator();
             all_data allData;
-
-
             for (int i=0; i<sem11; i++){
                 it.next();
                 count++;
             }
-
-
-
-
-
             int schetchik1 = 0;
             int schetchik2 = 0;
             int semestr = 1;
@@ -209,9 +192,6 @@ public class ExelParser {
                     count=sem21;
                     schetchik1=0;
                 }
-
-
-
                 if (semestr == 1){
                     allData = dataList1.get(schetchik1);
                     schetchik1++;
@@ -219,11 +199,6 @@ public class ExelParser {
                     allData = dataList2.get(schetchik2);
                     schetchik2++;
                 }
-
-
-                System.out.println(count);
-
-
                 Row row = it.next();
                 Iterator<Cell> cells = row.iterator();
                 cells.next();
@@ -235,12 +210,9 @@ public class ExelParser {
                         if ((i+1) == 2) {
                             String s = (String) declaredFields[i+1].get(allData);
                             cell.setCellValue(new HSSFRichTextString(s));
-                            System.out.print((String) declaredFields[i+1].get(allData)+" |");
                         } else {
                             cell.setCellValue(declaredFields[i+1].getDouble(allData));
-                            System.out.print(declaredFields[i+1].getDouble(allData)+" |");
                         }
-
                     i++;
                 }
                 count++;
