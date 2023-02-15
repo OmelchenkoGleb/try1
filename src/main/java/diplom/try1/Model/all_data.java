@@ -145,7 +145,6 @@ public class all_data {
     private double obsyag;
 
 
-
     @Override
     public String toString() {
         return "all_data{" +
@@ -206,7 +205,6 @@ public class all_data {
                 ", all=" + all +
                 ", all2=" + all2 +
                 ", obsyag=" + obsyag +
-                ", teachers=" + teachers +
                 '}';
     }
 

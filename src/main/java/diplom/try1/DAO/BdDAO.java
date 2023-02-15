@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class BdDAO {
@@ -34,6 +35,7 @@ public class BdDAO {
 
     public Iterable getSemestrAndTeacher(Long teacher, double semestr){return crudAllData.findAllByTeachersAndSemestr(crudTeachers.findById(teacher).get(),semestr);}
 
+    public List<all_data> getSemestrAndTeacherList(Long teacher, double semestr){return (List<all_data>) crudAllData.findAllByTeachersAndSemestr(crudTeachers.findById(teacher).get(),semestr);}
 
     public Iterable getTeachers(){return crudTeachers.findAll();}
 

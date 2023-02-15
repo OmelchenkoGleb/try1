@@ -3,14 +3,24 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Редагування даних з предмету</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <style>
+        body{
+            background-color: rgba(185, 185, 185, 0.8);
+        }
+    </style>
 </head>
 <body>
+<div class="container mt-5 mb-5 d-flex justify-content-center">
+    <div class="card px-1 py-4">
+        <div class="card-body">
 <form class="form-inline" action="/updateOneData" method="post">
+    <h6 class="card-title mb-3 container mt-1 mb-1 d-flex justify-content-center lead">Редагування</h6>
+    <br>
     <input type="hidden" name="id" th:value="${allData.getId()}">
     <div class="input-group">
-        <span class="input-group-text">Факультет(ін-т). Назва  дисципліни, іі загальний обсяг в годинах. Курс навчання, шифр груп, к-сть студентів в кожній групі (Б+К)</span>
+        <span class="input-group-text">Факультет(ін-т). Назва  дис.,обсяг в годинах. Курс, шифр,студентів в групі (Б+К)</span>
         <input type="text" th:value="${allData.getName()}" class="form-control" name="name">
     </div>
     <div class="input-group">
@@ -233,13 +243,17 @@
         <span class="input-group-text">Обсяг дисциплін за семестр</span>
         <input type="number" th:value="${allData.getObsyag()}" class="form-control" name="obsyag" step="0.01">
     </div>
-    <div class="form-group mx-sm-3 mb-2">
-        <label for="select" class="sr-only">Викладач</label>
+    <br>
+    <div class="form-group mx-sm-3 mb-2 ">
+        <label for="select" class="sr-only container mt-2 mb-2 d-flex justify-content-center">Викладач</label>
         <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" id="select" name="choose">
             <option th:each="el : ${data}" th:text="${el.name}" th:value="${el.id}" name="choose"></option>
         </select>
     </div>
-    <button type="submit" class="btn btn-primary mb-2">Змінити дані</button>
+    <button type="submit" class="btn btn-primary mb-2 container mt-2 mb-2 d-flex justify-content-center">Змінити дані</button>
 </form>
+        </div>
+    </div>
+</div>
 </body>
 </html>
