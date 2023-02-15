@@ -13,22 +13,22 @@ public class MainController {
 
     @Autowired
     BdDAO bdDAO;
-    @GetMapping("/add")
+    @GetMapping("/")
     public String start(Model model){
-        return "/add";
+        return "alldata";
     }
     @GetMapping("/add_alldata")
     public String addalldata(Model model){
-        return "/index";
+        return "index";
     }
     @GetMapping("/add_teachers")
     public String addteachers(Model model){
-        return "/addteachers";
+        return "addteachers";
     }
 
     @GetMapping("/all_delete")
     public String all_delete(Model model){
-        return "/all_delete";
+        return "all_delete";
     }
 
 
