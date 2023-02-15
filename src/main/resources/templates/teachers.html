@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
 
-  <title>Title</title>
+  <title>Викладачі</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link rel="stylesheet" href = "/static/css/css.css">
 
@@ -104,7 +104,7 @@
       <th>email</th>
       <th>Посада</th>
       <th>Ставка</th>
-      <th></th>
+      <th><a target="_blank" th:href="@{'/updateOneTeacher/{id}'(id=-1)}">Додати</a></th>
       <th></th>
     </tr>
     </thead>

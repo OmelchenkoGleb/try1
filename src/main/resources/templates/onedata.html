@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
 
-  <title>Title</title>
+  <title th:text="${teacher.getName()}"></title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link rel="stylesheet" href = "/static/css/css.css">
 
@@ -129,14 +129,8 @@
       <th>Індивідуальні заняття ІхГх0,25</th>
       <th>Індивідуальні заняття ІхГх0,26</th>
       <th>Екзамени, 0.33хEx(Б+БК)</th>
-
-
-
       <th>Екзамени, 0.33хEx(К+КК)</th>
       <th>Заліки, 2хГхZ</th>
-
-
-
       <th>Заліки, 2хГхZ</th>
       <th>Контр.роб.(мод.,темат.), 0.25хМх(Б+БК)</th>
       <th>Контр.роб.(мод.,темат.), 0.25хМх(К+КК)</th>
@@ -155,7 +149,7 @@
       <th>Всього годин</th>
       <th>Всього годин</th>
       <th>Обсяг дисципліни за семестр, N годин</th>
-      <th></th>
+      <th><a target="_blank" th:href="@{'/updateOneData/{id}'(id=-1)}">Додати</a></th>
       <th></th>
     </tr>
     </thead>
@@ -297,7 +291,7 @@
       <th>Всього годин</th>
       <th>Всього годин</th>
       <th>Обсяг дисципліни за семестр, N годин</th>
-      <th></th>
+      <th><a target="_blank" th:href="@{'/updateOneData/{id}'(id=-1)}">Додати</a></th>
       <th></th>
     </tr>
     </thead>

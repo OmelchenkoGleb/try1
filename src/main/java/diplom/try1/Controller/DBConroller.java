@@ -70,6 +70,12 @@ public class DBConroller {
 
     @GetMapping("/updateOneData/{id}")
     public String updateOneData(@PathVariable(value = "id") Long id, Model model){
+        if (id == -1){
+            all_data allData = new all_data();
+            model.addAttribute("allData", allData);
+            model.addAttribute("data", bdDAO.getTeachers());
+            return "/updatealldata";
+        }
         all_data allData = bdDAO.findOneData(id);
         model.addAttribute("allData", allData);
         model.addAttribute("data", bdDAO.getTeachers());
@@ -108,6 +114,11 @@ public class DBConroller {
 
     @GetMapping("/updateOneTeacher/{id}")
     public String updateOneTeacher(@PathVariable(value = "id") Long id, Model model){
+        if (id == -1){
+            Teachers teacher = new Teachers();
+            model.addAttribute("teacher", teacher);
+            return "/updateteacher";
+        }
         Teachers teacher = bdDAO.findOneTeacher(id);
         model.addAttribute("teacher", teacher);
         return "/updateteacher";
