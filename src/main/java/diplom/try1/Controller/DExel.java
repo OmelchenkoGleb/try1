@@ -44,7 +44,7 @@ public class DExel {
         model.addAttribute("data1", bdDAO.getSemestr(1));
         model.addAttribute("data2", bdDAO.getSemestr(2));
         model.addAttribute("accept","Дані успішно додані");
-        return "/alldata";
+        return "alldata";
     }
 
     @PostMapping("/loadteachers")
@@ -54,7 +54,7 @@ public class DExel {
         bdDAO.savedataTeacherslist(datalist);
         model.addAttribute("accept","Дані успішно додані");
         model.addAttribute("data", bdDAO.getTeachers());
-        return "/teachers";
+        return "teachers";
     }
 
     @PostMapping("/download")
@@ -84,14 +84,14 @@ public class DExel {
                 }
                 model.addAttribute("data", bdDAO.getTeachers());
                 model.addAttribute("accept","Файл викачено успішно !");
-                return "/download";
+                return "download";
             } catch (Exception e){
                 if(file.delete()){
                     System.out.println("Файл видалений");
                 }
                 model.addAttribute("data", bdDAO.getTeachers());
                 model.addAttribute("accept","s !");
-                return "/download";
+                return "download";
             }
         } else {
             try {
@@ -108,7 +108,7 @@ public class DExel {
                 }
                 model.addAttribute("data", bdDAO.getTeachers());
                 model.addAttribute("accept","s");
-                return "/download";
+                return "download";
             }
 
         }
