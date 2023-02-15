@@ -41,10 +41,11 @@ public class DBConroller {
     @PostMapping("/sett")
     public String setteacher(@RequestParam Long choose, @RequestParam Long idalldate, Model model){
         bdDAO.updateAllData(idalldate,choose);
-        model.addAttribute("accept","Дані успішно додані");
-        model.addAttribute("data1", bdDAO.getSemestrAndNullTeacher(null, 1));
-        model.addAttribute("data2", bdDAO.getSemestrAndNullTeacher(null,2));
-        return "/alldata";
+        model.addAttribute("data1", bdDAO.getSemestrAndTeacher(choose, 1));
+        model.addAttribute("data2", bdDAO.getSemestrAndTeacher(choose,2));
+        model.addAttribute("teacher", bdDAO.findOneTeacher(choose));
+        model.addAttribute("accept","Дані успішно змінені !");
+        return "/onedata";
     }
 
     @GetMapping("/all_deletealldata")
@@ -78,20 +79,31 @@ public class DBConroller {
     @PostMapping("/updateOneData")
     public String updateOneDataa(@ModelAttribute all_data allData, @RequestParam Long choose, Model model){
         bdDAO.updateOneData(allData, choose);
-        model.addAttribute("accept","Дані успішно змінені");
-        model.addAttribute("data1", bdDAO.getSemestrAndNullTeacher(null, 1));
-        model.addAttribute("data2", bdDAO.getSemestrAndNullTeacher(null,2));
-        return "/alldata";
+
+        model.addAttribute("data1", bdDAO.getSemestrAndTeacher(choose, 1));
+        model.addAttribute("data2", bdDAO.getSemestrAndTeacher(choose,2));
+        model.addAttribute("teacher", bdDAO.findOneTeacher(choose));
+        model.addAttribute("accept","Дані успішно змінені !");
+        return "/onedata";
     }
 
     @GetMapping("/deleteOneData/{id}")
     public String deleteOneData(@PathVariable(value = "id") Long id, Model model){
-        System.out.println("222222222222");
         bdDAO.deleteOneData(id);
         model.addAttribute("accept","Дані успішно видалені");
         model.addAttribute("data1", bdDAO.getSemestrAndNullTeacher(null, 1));
         model.addAttribute("data2", bdDAO.getSemestrAndNullTeacher(null,2));
         return "/alldata";
+    }
+
+    @GetMapping("/deleteOneData/{id}/{idt}")
+    public String deleteOneDat(@PathVariable(value = "id") Long id, @PathVariable(value = "idt") Long idt, Model model){
+        bdDAO.deleteOneData(id);
+        model.addAttribute("accept","Дані успішно видалені");
+        model.addAttribute("teacher", bdDAO.findOneTeacher(idt));
+        model.addAttribute("data1", bdDAO.getSemestrAndTeacher(idt, 1));
+        model.addAttribute("data2", bdDAO.getSemestrAndTeacher(idt,2));
+        return "/onedata";
     }
 
     @GetMapping("/updateOneTeacher/{id}")

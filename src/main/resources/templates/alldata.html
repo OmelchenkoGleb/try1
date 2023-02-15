@@ -72,12 +72,12 @@
             <li><a href="/all_deleteallteachers" class="btn btn-danger navbar-btn">Видалити усіх викладачів</a></li>
           </div>
           <ul class="nav navbar-nav">
-            <li><a href="/choose">Переглянути дані по викладачам</a></li>
-            <li class="active"><a href="/alldata">Переглянути дані де нема викладача</a></li>
-            <li><a href="/teachers">Переглянути таблицю з викладачами</a></li>
+            <li><a target="_blank" href="/choose">Переглянути дані по викладачам</a></li>
+            <li class="active"><a target="_blank" href="/alldata">Переглянути дані де нема викладача</a></li>
+            <li><a target="_blank" href="/teachers">Переглянути таблицю з викладачами</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <a class="navbar-brand" href="/download">Сформувати персональні плани для Викладачів</a>
+            <a class="navbar-brand" target="_blank" href="/download">Сформувати персональні плани для Викладачів</a>
           </ul>
         </div>
       </nav>
@@ -92,6 +92,9 @@
 
 
 <div class="jumbotron text-center">
+  <div th:if="${teacher}">
+    <h1 th:text="${teacher.getName()}"></h1>
+  </div>
   <h1>Перший семестр</h1>
 </div>
 <input class="form-control" id="Input1" type="text" placeholder="Ведіть інформацію по якій шукати для першого семестра..">
@@ -102,31 +105,33 @@
     <tr>
       <th>Факультет(ін-т). Назва  дисципліни, іі загальний обсяг в годинах. Курс навчання, шифр груп, к-сть студентів в кожній групі (Б+К)</th>
       <th>Викладач</th>
-      <th>Обсяг дисципліни за семестр</th>
-      <th>Лекції</th>
-      <th>Практ</th>
-      <th>Лабор</th>
-      <th>Індивідуальні заняття</th>
-      <th>Екзамени</th>
-      <th>Заліки</th>
-      <th>Контр.роб</th>
-      <th>Курсові проекти</th>
-      <th>Курсові роботи</th>
-      <th>РГР, РР, ГР,</th>
-      <th>ДКР</th>
-      <th>Реферати</th>
-      <th>Академічні бюдж</th>
-      <th>Підгрупи для ПЗ</th>
-      <th>Підгр. для лаб.роб</th>
-      <th>Академ. контрактні</th>
-      <th>Підгрупи для ПЗ</th>
-      <th>Підгр. для лаб.роб</th>
-      <th>Б</th>
-      <th>К</th>
-      <th>БК</th>
-      <th>КК</th>
-      <th>Кількість бюджетних потоків</th>
-      <th>Кількість контрактних потоків</th>
+
+<!--      <th>Обсяг дисципліни за семестр</th>-->
+<!--      <th>Лекції</th>-->
+<!--      <th>Практ</th>-->
+<!--      <th>Лабор</th>-->
+<!--      <th>Індивідуальні заняття</th>-->
+<!--      <th>Екзамени</th>-->
+<!--      <th>Заліки</th>-->
+<!--      <th>Контр.роб</th>-->
+<!--      <th>Курсові проекти</th>-->
+<!--      <th>Курсові роботи</th>-->
+<!--      <th>РГР, РР, ГР,</th>-->
+<!--      <th>ДКР</th>-->
+<!--      <th>Реферати</th>-->
+<!--      <th>Академічні бюдж</th>-->
+<!--      <th>Підгрупи для ПЗ</th>-->
+<!--      <th>Підгр. для лаб.роб</th>-->
+<!--      <th>Академ. контрактні</th>-->
+<!--      <th>Підгрупи для ПЗ</th>-->
+<!--      <th>Підгр. для лаб.роб</th>-->
+<!--      <th>Б</th>-->
+<!--      <th>К</th>-->
+<!--      <th>БК</th>-->
+<!--      <th>КК</th>-->
+<!--      <th>Кількість бюджетних потоків</th>-->
+<!--      <th>Кількість контрактних потоків</th>-->
+
       <th>Лекції, Л х Р</th>
       <th>Лекції, Л х РК</th>
       <th>Практ.заняття (комп. практикум, семінари), П х ГП семінари), П х ГП</th>
@@ -136,14 +141,8 @@
       <th>Індивідуальні заняття ІхГх0,25</th>
       <th>Індивідуальні заняття ІхГх0,26</th>
       <th>Екзамени, 0.33хEx(Б+БК)</th>
-
-
-
       <th>Екзамени, 0.33хEx(К+КК)</th>
       <th>Заліки, 2хГхZ</th>
-
-
-
       <th>Заліки, 2хГхZ</th>
       <th>Контр.роб.(мод.,темат.), 0.25хМх(Б+БК)</th>
       <th>Контр.роб.(мод.,темат.), 0.25хМх(К+КК)</th>
@@ -170,32 +169,36 @@
     <tbody id="Table1">
     <tr th:each="el : ${data1}">
       <th th:text="${el.name}"></th>
-      <th><a th:href="@{'/setteacher/{id}/{name}'(id=${el.id}, name=${el.name})}">Обрати викладача</a></th>
-      <th th:text="${el.N}"></th>
-      <th th:text="${el.LL}"></th>
-      <th th:text="${el.PP}"></th>
-      <th th:text="${el.L}"></th>
-      <th th:text="${el.I}"></th>
-      <th th:text="${el.E}"></th>
-      <th th:text="${el.Z}"></th>
-      <th th:text="${el.M}"></th>
-      <th th:text="${el.Q}"></th>
-      <th th:text="${el.G}"></th>
-      <th th:text="${el.R}"></th>
-      <th th:text="${el.D}"></th>
-      <th th:text="${el.F}"></th>
-      <th th:text="${el.GG}"></th>
-      <th th:text="${el.GGPP}"></th>
-      <th th:text="${el.GGL}"></th>
-      <th th:text="${el.GGk}"></th>
-      <th th:text="${el.GGKPP}"></th>
-      <th th:text="${el.GGKL}"></th>
-      <th th:text="${el.BB}"></th>
-      <th th:text="${el.K}"></th>
-      <th th:text="${el.BBk}"></th>
-      <th th:text="${el.KK}"></th>
-      <th th:text="${el.P}"></th>
-      <th th:text="${el.PK}"></th>
+      <th><a target="_blank" th:href="@{'/setteacher/{id}/{name}'(id=${el.id}, name=${el.name})}">Обрати викладача</a></th>
+
+
+<!--      <th th:text="${el.N}"></th>-->
+<!--      <th th:text="${el.LL}"></th>-->
+<!--      <th th:text="${el.PP}"></th>-->
+<!--      <th th:text="${el.L}"></th>-->
+<!--      <th th:text="${el.I}"></th>-->
+<!--      <th th:text="${el.E}"></th>-->
+<!--      <th th:text="${el.Z}"></th>-->
+<!--      <th th:text="${el.M}"></th>-->
+<!--      <th th:text="${el.Q}"></th>-->
+<!--      <th th:text="${el.G}"></th>-->
+<!--      <th th:text="${el.R}"></th>-->
+<!--      <th th:text="${el.D}"></th>-->
+<!--      <th th:text="${el.F}"></th>-->
+<!--      <th th:text="${el.GG}"></th>-->
+<!--      <th th:text="${el.GGPP}"></th>-->
+<!--      <th th:text="${el.GGL}"></th>-->
+<!--      <th th:text="${el.GGk}"></th>-->
+<!--      <th th:text="${el.GGKPP}"></th>-->
+<!--      <th th:text="${el.GGKL}"></th>-->
+<!--      <th th:text="${el.BB}"></th>-->
+<!--      <th th:text="${el.K}"></th>-->
+<!--      <th th:text="${el.BBk}"></th>-->
+<!--      <th th:text="${el.KK}"></th>-->
+<!--      <th th:text="${el.P}"></th>-->
+<!--      <th th:text="${el.PK}"></th>-->
+
+
       <th th:text="${el.LL_P}"></th>
       <th th:text="${el.LL_PK}"></th>
       <th th:text="${el.PP_GGPP}"></th>
@@ -227,7 +230,7 @@
       <th th:text="${el.all}"></th>
       <th th:text="${el.all2}"></th>
       <th th:text="${el.obsyag}"></th>
-      <th><a th:href="@{'/updateOneData/{id}'(id=${el.id})}">Редагувати</a></th>
+      <th><a target="_blank" th:href="@{'/updateOneData/{id}'(id=${el.id})}">Редагувати</a></th>
       <th><a th:href="@{'/deleteOneData/{id}'(id=${el.id})}">Видалити</a></th>
     </tr>
     </tbody>
@@ -246,31 +249,33 @@
     <tr>
       <th>Факультет(ін-т). Назва  дисципліни, іі загальний обсяг в годинах. Курс навчання, шифр груп, к-сть студентів в кожній групі (Б+К)</th>
       <th>Викладач</th>
-      <th>Обсяг дисципліни за семестр</th>
-      <th>Лекції</th>
-      <th>Практ</th>
-      <th>Лабор</th>
-      <th>Індивідуальні заняття </th>
-      <th>Екзамени</th>
-      <th>Заліки</th>
-      <th>Контр.роб</th>
-      <th>Курсові проекти</th>
-      <th>Курсові роботи</th>
-      <th>РГР, РР, ГР,</th>
-      <th>ДКР</th>
-      <th>Реферати</th>
-      <th>Академічні бюдж</th>
-      <th>Підгрупи для ПЗ</th>
-      <th>Підгр. для лаб.роб</th>
-      <th>Академ. контрактні</th>
-      <th>Підгрупи для ПЗ</th>
-      <th>Підгр. для лаб.роб</th>
-      <th>Б</th>
-      <th>К</th>
-      <th>БК</th>
-      <th>КК</th>
-      <th>Кількість бюджетних потоків</th>
-      <th>Кількість контрактних потоків</th>
+
+<!--      <th>Обсяг дисципліни за семестр</th>-->
+<!--      <th>Лекції</th>-->
+<!--      <th>Практ</th>-->
+<!--      <th>Лабор</th>-->
+<!--      <th>Індивідуальні заняття </th>-->
+<!--      <th>Екзамени</th>-->
+<!--      <th>Заліки</th>-->
+<!--      <th>Контр.роб</th>-->
+<!--      <th>Курсові проекти</th>-->
+<!--      <th>Курсові роботи</th>-->
+<!--      <th>РГР, РР, ГР,</th>-->
+<!--      <th>ДКР</th>-->
+<!--      <th>Реферати</th>-->
+<!--      <th>Академічні бюдж</th>-->
+<!--      <th>Підгрупи для ПЗ</th>-->
+<!--      <th>Підгр. для лаб.роб</th>-->
+<!--      <th>Академ. контрактні</th>-->
+<!--      <th>Підгрупи для ПЗ</th>-->
+<!--      <th>Підгр. для лаб.роб</th>-->
+<!--      <th>Б</th>-->
+<!--      <th>К</th>-->
+<!--      <th>БК</th>-->
+<!--      <th>КК</th>-->
+<!--      <th>Кількість бюджетних потоків</th>-->
+<!--      <th>Кількість контрактних потоків</th>-->
+
       <th>Лекції, Л х Р</th>
       <th>Лекції, Л х РК</th>
       <th>Практ.заняття (комп. практикум, семінари), П х ГП семінари), П х ГП</th>
@@ -307,32 +312,34 @@
     <tbody id="Table2">
     <tr th:each="el : ${data2}">
       <th th:text="${el.name}"></th>
-      <th><a th:href="@{'/setteacher/{id}/{name}'(id=${el.id}, name=${el.name})}">Обрати викладача</a></th>
-      <th th:text="${el.N}"></th>
-      <th th:text="${el.LL}"></th>
-      <th th:text="${el.PP}"></th>
-      <th th:text="${el.L}"></th>
-      <th th:text="${el.I}"></th>
-      <th th:text="${el.E}"></th>
-      <th th:text="${el.Z}"></th>
-      <th th:text="${el.M}"></th>
-      <th th:text="${el.Q}"></th>
-      <th th:text="${el.G}"></th>
-      <th th:text="${el.R}"></th>
-      <th th:text="${el.D}"></th>
-      <th th:text="${el.F}"></th>
-      <th th:text="${el.GG}"></th>
-      <th th:text="${el.GGPP}"></th>
-      <th th:text="${el.GGL}"></th>
-      <th th:text="${el.GGk}"></th>
-      <th th:text="${el.GGKPP}"></th>
-      <th th:text="${el.GGKL}"></th>
-      <th th:text="${el.BB}"></th>
-      <th th:text="${el.K}"></th>
-      <th th:text="${el.BBk}"></th>
-      <th th:text="${el.KK}"></th>
-      <th th:text="${el.P}"></th>
-      <th th:text="${el.PK}"></th>
+      <th><a target="_blank" th:href="@{'/setteacher/{id}/{name}'(id=${el.id}, name=${el.name})}">Обрати викладача</a></th>
+
+<!--      <th th:text="${el.N}"></th>-->
+<!--      <th th:text="${el.LL}"></th>-->
+<!--      <th th:text="${el.PP}"></th>-->
+<!--      <th th:text="${el.L}"></th>-->
+<!--      <th th:text="${el.I}"></th>-->
+<!--      <th th:text="${el.E}"></th>-->
+<!--      <th th:text="${el.Z}"></th>-->
+<!--      <th th:text="${el.M}"></th>-->
+<!--      <th th:text="${el.Q}"></th>-->
+<!--      <th th:text="${el.G}"></th>-->
+<!--      <th th:text="${el.R}"></th>-->
+<!--      <th th:text="${el.D}"></th>-->
+<!--      <th th:text="${el.F}"></th>-->
+<!--      <th th:text="${el.GG}"></th>-->
+<!--      <th th:text="${el.GGPP}"></th>-->
+<!--      <th th:text="${el.GGL}"></th>-->
+<!--      <th th:text="${el.GGk}"></th>-->
+<!--      <th th:text="${el.GGKPP}"></th>-->
+<!--      <th th:text="${el.GGKL}"></th>-->
+<!--      <th th:text="${el.BB}"></th>-->
+<!--      <th th:text="${el.K}"></th>-->
+<!--      <th th:text="${el.BBk}"></th>-->
+<!--      <th th:text="${el.KK}"></th>-->
+<!--      <th th:text="${el.P}"></th>-->
+<!--      <th th:text="${el.PK}"></th>-->
+
       <th th:text="${el.LL_P}"></th>
       <th th:text="${el.LL_PK}"></th>
       <th th:text="${el.PP_GGPP}"></th>
@@ -362,7 +369,7 @@
       <th th:text="${el.all}"></th>
       <th th:text="${el.all2}"></th>
       <th th:text="${el.obsyag}"></th>
-      <th><a th:href="@{'/updateOneData/{id}'(id=${el.id})}">Редагувати</a></th>
+      <th><a target="_blank" th:href="@{'/updateOneData/{id}'(id=${el.id})}">Редагувати</a></th>
       <th><a th:href="@{'/deleteOneData/{id}'(id=${el.id})}">Видалити</a></th>
     </tr>
     </tbody>

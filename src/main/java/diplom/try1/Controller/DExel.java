@@ -67,32 +67,50 @@ public class DExel {
         File file = new File(teacher.getName() + ".xls");
 
         if (Objects.equals(download, "1")){
-            response.setContentType("application/octet-stream");
-            response.setHeader("Content-Disposition", "attachment; filename=" + teacher.getName());
-            ServletOutputStream outputStream = response.getOutputStream();
-            BufferedInputStream inputStream = new BufferedInputStream(new FileInputStream(file));
-            byte[] buffer = new byte[1024];
-            int bytesRead = 0;
-            while ((bytesRead = inputStream.read(buffer)) != -1) {
-                outputStream.write(buffer, 0, bytesRead);
+            try {
+                response.setContentType("application/octet-stream");
+                response.setHeader("Content-Disposition", "attachment; filename=" + teacher.getName());
+                ServletOutputStream outputStream = response.getOutputStream();
+                BufferedInputStream inputStream = new BufferedInputStream(new FileInputStream(file));
+                byte[] buffer = new byte[1024];
+                int bytesRead = 0;
+                while ((bytesRead = inputStream.read(buffer)) != -1) {
+                    outputStream.write(buffer, 0, bytesRead);
+                }
+                inputStream.close();
+                outputStream.close();
+                if(file.delete()){
+                    System.out.println("Файл видалений");
+                }
+                model.addAttribute("data", bdDAO.getTeachers());
+                model.addAttribute("accept","Файл викачено успішно !");
+                return "/download";
+            } catch (Exception e){
+                if(file.delete()){
+                    System.out.println("Файл видалений");
+                }
+                model.addAttribute("data", bdDAO.getTeachers());
+                model.addAttribute("accept","s !");
+                return "/download";
             }
-            inputStream.close();
-            outputStream.close();
-
-            if(file.delete()){
-                System.out.println("Файл видалений");
-            }
-            model.addAttribute("data", bdDAO.getTeachers());
-            model.addAttribute("accept","Файл викачено успішно !");
-            return "/download";
         } else {
-            mailSender.sendMessageWithAttachment(teacher.getEmail(),"Сгенероване пед навантаження для "+teacher.getName(), "Прошу подивіться файл в закріплені для цього письма.\nЗ повагою Оксана Дацюк.", file.getName());
-            if(file.delete()){
-                System.out.println("Файл видалений");
+            try {
+                mailSender.sendMessageWithAttachment(teacher.getEmail(),"Сгенероване пед навантаження для "+teacher.getName(), "Прошу подивіться файл в закріплені для цього письма.\nЗ повагою Оксана Дацюк.", file.getName());
+                if(file.delete()){
+                    System.out.println("Файл видалений");
+                }
+                model.addAttribute("data", bdDAO.getTeachers());
+                model.addAttribute("accept","Файл викачено успішно !");
+                return "/download";
+            } catch (Exception e) {
+                if(file.delete()){
+                    System.out.println("Файл видалений");
+                }
+                model.addAttribute("data", bdDAO.getTeachers());
+                model.addAttribute("accept","s");
+                return "/download";
             }
-            model.addAttribute("data", bdDAO.getTeachers());
-            model.addAttribute("accept","Файл викачено успішно !");
-            return "/download";
+
         }
 
     }
