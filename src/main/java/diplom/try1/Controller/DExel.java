@@ -101,7 +101,7 @@ public class DExel {
                 }
                 model.addAttribute("data", bdDAO.getTeachers());
                 model.addAttribute("accept","Файл викачено успішно !");
-                return "/download";
+                return "download";
             } catch (Exception e) {
                 if(file.delete()){
                     System.out.println("Файл видалений");

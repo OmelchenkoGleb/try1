@@ -1,12 +1,15 @@
 package diplom.try1.DAO;
 
+import diplom.try1.CrudRepository.CrudShablon;
 import diplom.try1.Model.Teachers;
 import diplom.try1.Model.all_data;
+import diplom.try1.Model.shablon;
 import org.apache.poi.hssf.usermodel.HSSFRichTextString;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -20,6 +23,8 @@ import java.util.Objects;
 
 @Component
 public class ExelParser {
+    @Autowired
+    CrudShablon crudShablon;
     public ArrayList<all_data> parser(MultipartFile multipartFile, int sem11, int sem12, int sem21, int sem22){
         InputStream inputStream = null;
         HSSFWorkbook workbook = null;
@@ -156,13 +161,34 @@ public class ExelParser {
         HSSFWorkbook workbook = null;
         Class<all_data> all_dataClass = all_data.class;
         Field[] declaredFields = all_dataClass.getDeclaredFields(); //  помощью рефлексии получаем поля класса
-        File from = new File("SHABLON.xls");
+
+
+        shablon shablon = crudShablon.findById(1L).get();
+        System.out.println(shablon.getName());
+        File from = new File(shablon.getName()+".xls");
+        try (FileOutputStream fos = new FileOutputStream(from)) {
+            fos.write(shablon.getBytes());
+            fos.flush();
+            System.out.println("Шаблон викачено з бд !");
+        }
+
+
         File to = new File(teacher.getName()+".xls");
+
+
+
+
         try {
             Files.copy(from.toPath(), to.toPath());
+            if (from.delete()){
+                System.out.println("Шаблон видалено!");
+            }
         } catch (Exception e){
             if (to.delete()){
                 Files.copy(from.toPath(), to.toPath());
+                if (from.delete()){
+                    System.out.println("Шаблон видалено!");
+                }
             }
         }
         int sem11 = 8;
