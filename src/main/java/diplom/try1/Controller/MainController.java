@@ -33,8 +33,8 @@ public class MainController {
         return "all_delete";
     }
 
-    @GetMapping("test")
+    @GetMapping("/test")
     public String test(Model model){
-        return "test";
+        return "/test";
     }
 }
