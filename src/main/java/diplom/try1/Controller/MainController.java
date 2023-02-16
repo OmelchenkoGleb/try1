@@ -35,6 +35,6 @@ public class MainController {
 
     @GetMapping("/test")
     public String test(Model model){
-        return "test";
+        return "/test";
     }
 }
