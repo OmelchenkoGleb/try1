@@ -15,6 +15,8 @@ public class MainController {
     BdDAO bdDAO;
     @GetMapping("/")
     public String start(Model model){
+        model.addAttribute("data1", bdDAO.getSemestrAndNullTeacher(null, 1));
+        model.addAttribute("data2", bdDAO.getSemestrAndNullTeacher(null,2));
         return "alldata";
     }
     @GetMapping("/add_alldata")
