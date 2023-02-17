@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 @Controller
@@ -167,6 +168,18 @@ public class DBConroller {
         return "download";
     }
 
+    @GetMapping("/addshablon")
+    public String shablon(Model model){
+        return "shablon";
+    }
 
+    @PostMapping("/loadshablon")
+    public String loadteachers(Model model, @RequestParam MultipartFile file) throws IOException {
+        bdDAO.saveShablon(file);
+        model.addAttribute("accept","Шаблон успішно додан !");
+        model.addAttribute("data1", bdDAO.getSemestr(1));
+        model.addAttribute("data2", bdDAO.getSemestr(2));
+        return "alldata";
+    }
 
 }

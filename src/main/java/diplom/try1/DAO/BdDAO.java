@@ -1,12 +1,16 @@
 package diplom.try1.DAO;
 
 import diplom.try1.CrudRepository.CrudAllData;
+import diplom.try1.CrudRepository.CrudShablon;
 import diplom.try1.CrudRepository.CrudTeachers;
 import diplom.try1.Model.Teachers;
 import diplom.try1.Model.all_data;
+import diplom.try1.Model.shablon;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,9 +19,14 @@ public class BdDAO {
 
     @Autowired
     CrudAllData crudAllData;
-
     @Autowired
     CrudTeachers crudTeachers;
+    @Autowired
+    CrudShablon crudShablon;
+
+    public ArrayList<shablon> isShablon(){
+        return (ArrayList<shablon>) crudShablon.findAll();
+    }
 
     public void savedatalist(ArrayList<all_data> datalist){
         crudAllData.saveAll(datalist);
@@ -78,5 +87,12 @@ public class BdDAO {
         Teachers teacher = crudTeachers.findById(idteachers).get();
         allData.setTeachers(teacher);
         crudAllData.save(allData);
+    }
+
+    public void saveShablon(MultipartFile file) throws IOException {
+        shablon shablon = new shablon();
+        shablon.setName(file.getOriginalFilename());
+        shablon.setBytes(file.getBytes());
+        crudShablon.save(shablon);
     }
 }
