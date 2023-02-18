@@ -10,5 +10,5 @@ RUN mvn clean package -Pprod -DskipTests
 #
 FROM openjdk:19-jdk-slim
 COPY --from=build /target/try1-0.0.1-SNAPSHOT.jar demo.jar
-EXPOSE 8080
+EXPOSE 3306
 ENTRYPOINT ["java","-jar","demo.jar"]
