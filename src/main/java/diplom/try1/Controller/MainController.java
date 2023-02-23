@@ -17,6 +17,12 @@ public class MainController {
     @Autowired
     BdDAO bdDAO;
 
+    @GetMapping("/data")
+    public String data(Model model){
+        model.addAttribute("data1", bdDAO.getSemestr(1));
+        model.addAttribute("data2", bdDAO.getSemestr(2));
+        return "data";
+    }
     @GetMapping("/")
     public String start(Model model){
         ArrayList<shablon> shablon = bdDAO.isShablon();

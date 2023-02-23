@@ -9,5 +9,5 @@ public interface CrudAllData extends CrudRepository<all_data,Long> {
     Iterable<all_data> findAllByTeachersAndSemestr(Teachers teachers, double semestr);
 
 
-
+    Iterable<all_data> findAllBySemestrOrderByTeachers(double semestr);
 }

@@ -66,10 +66,10 @@ public class ExelParser {
                             Cell cell = cells.next();
                             declaredFields[i+1].setAccessible(true);
                             try {
-                                declaredFields[i+1].setDouble(obj,cell.getNumericCellValue());
+                                declaredFields[i+1].setFloat(obj,(float) cell.getNumericCellValue());
                             } catch (Exception e){
                                 if ((i+1) == 2) declaredFields[i+1].set(obj,cell.getStringCellValue()); // вписываем имя отдельно так как остальные налл а мы даём значение 0
-                                else declaredFields[i+1].setDouble(obj,0);
+                                else declaredFields[i+1].setFloat(obj,0);
                             }
                             i++;
                         }
@@ -191,7 +191,7 @@ public class ExelParser {
                 }
             }
         }
-        int sem11 = 8;
+        int sem11 = 9;
         int sem21 = 115;
         int count = 0;
         try {
@@ -237,7 +237,7 @@ public class ExelParser {
                             String s = (String) declaredFields[i+1].get(allData);
                             cell.setCellValue(new HSSFRichTextString(s));
                         } else {
-                            cell.setCellValue(declaredFields[i+1].getDouble(allData));
+                            cell.setCellValue(declaredFields[i+1].getFloat(allData));
                         }
                     i++;
                 }

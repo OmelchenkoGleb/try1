@@ -38,7 +38,7 @@ public class BdDAO {
 
     public Iterable getAllData(){return crudAllData.findAll();}
 
-    public Iterable getSemestr(double semestr){return crudAllData.findAllBySemestr(semestr);}
+    public Iterable getSemestr(double semestr){return crudAllData.findAllBySemestrOrderByTeachers(semestr);}
 
     public Iterable getSemestrAndNullTeacher(Teachers teacher, double semestr){return crudAllData.findAllByTeachersAndSemestr(teacher,semestr);}
 
