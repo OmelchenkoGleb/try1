@@ -95,4 +95,8 @@ public class BdDAO {
         shablon.setBytes(file.getBytes());
         crudShablon.save(shablon);
     }
+
+    public void saveData(all_data allData) {
+        crudAllData.save(allData);
+    }
 }

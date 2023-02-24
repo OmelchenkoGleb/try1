@@ -31,6 +31,25 @@
       background-color: rgba(0, 0, 0, 0.76);
     }
   </style>
+  <script>
+    function myFunction1() {
+      var x = document.getElementById("myDIV1");
+      if (x.style.display === "none") {
+        x.style.display = "block";
+      } else {
+        x.style.display = "none";
+      }
+    }
+
+    function myFunction2() {
+      var x = document.getElementById("myDIV2");
+      if (x.style.display === "none") {
+        x.style.display = "block";
+      } else {
+        x.style.display = "none";
+      }
+    }
+  </script>
   <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
     <symbol id="check-circle-fill" fill="currentColor" viewBox="0 0 16 16">
       <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
@@ -56,9 +75,9 @@
       <nav class="navbar navbar-inverse">
         <div class="container-fluid">
           <div class="navbar-header">
-            <li><a href="/add_alldata" class="btn btn-primary navbar-btn">Загрузити дані</a></li>
+            <li><a href="/add_alldata" class="btn btn-primary navbar-btn">Загрузити предмети</a></li>
             <li><a href="/add_teachers" class="btn btn-primary navbar-btn">Загрузити викладачів</a></li>
-            <li><a href="/all_deletealldata" class="btn btn-danger navbar-btn">Видалити усі дані</a></li>
+            <li><a href="/all_deletealldata" class="btn btn-danger navbar-btn">Видалити усі предмети</a></li>
             <li><a href="/all_deleteallteachers" class="btn btn-danger navbar-btn">Видалити усіх викладачів</a></li>
           </div>
           <ul class="nav navbar-nav">
@@ -68,7 +87,8 @@
             <li><a href="/teachers">Переглянути таблицю з викладачами</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <a class="navbar-brand" target="_blank" href="/download">Сформувати персональні плани для Викладачів</a>
+            <a class="btn btn-primary navbar-btn" target="_blank" href="/download">Сформувати персональні плани для Викладачів</a>
+            <a class="btn btn-primary navbar-btn" target="_blank" href="/download">Сформувати звіт</a>
           </ul>
         </div>
       </nav>
@@ -84,11 +104,13 @@
 <div class="jumbotron text-center">
   <h1 th:text="${teacher.getName()}"></h1>
   <h1>Перший семестр</h1>
+  <button type="button" onclick="myFunction1()" class="btn btn-light">Відкрити/Закрити</button>
 </div>
 
-<input class="form-control" id="Input1" type="text" placeholder="Ведіть інформацію по якій шукати для першого семестра..">
-<br>
-<div class="table-responsive-sm">
+
+<div class="table-responsive-sm" id="myDIV1">
+  <input class="form-control" id="Input1" type="text" placeholder="Ведіть інформацію по якій шукати для першого семестра..">
+  <br>
   <table class="table table-bordered table-dark table-striped">
     <thead class="thead-light">
     <tr>
@@ -227,10 +249,12 @@
 
 <div class="jumbotron text-center ">
   <h1>Другий семестр</h1>
+  <button type="button" onclick="myFunction2()" class="btn btn-light">Відкрити/Закрити</button>
 </div>
-<input class="form-control" id="Input2" type="text" placeholder="Ведіть інформацію по якій шукати для другого семестра">
-<br>
-<div class="table-responsive-sm">
+
+<div class="table-responsive-sm" id="myDIV2">
+  <input class="form-control" id="Input2" type="text" placeholder="Ведіть інформацію по якій шукати для другого семестра">
+  <br>
   <table class="table table-bordered table-dark table-striped">
     <thead class="thead-light">
     <tr>

@@ -15,7 +15,9 @@
 <div class="container mt-5 mb-5 d-flex justify-content-center">
     <div class="card px-1 py-4">
         <div class="card-body">
-<form class="form-inline" action="/updateOneData" method="post">
+            <a class="btn btn-secondary container mt-5 mb-5 d-flex justify-content-center" target="_blank" th:href="@{'/createCopy/{id}'(id=${allData.getId()})}">Створити копію</a>
+
+            <form class="form-inline" action="/updateOneData" method="post">
     <h6 class="card-title mb-3 container mt-1 mb-1 d-flex justify-content-center lead">Редагування</h6>
     <br>
     <input type="hidden" name="id" th:value="${allData.getId()}">

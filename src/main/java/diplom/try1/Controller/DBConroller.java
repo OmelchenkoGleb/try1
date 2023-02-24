@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 
 @Controller
@@ -182,4 +183,24 @@ public class DBConroller {
         return "alldata";
     }
 
+    @GetMapping("/createCopy/{id}")
+    public String createCopy(@PathVariable(value = "id") Long id, Model model) throws IllegalAccessException {
+        all_data allData = bdDAO.findOneData(id);
+        all_data newdata = new all_data();
+        Class<all_data> all_dataClass = all_data.class;
+        Field[] declaredFields = all_dataClass.getDeclaredFields();
+        for (int i = 1; i<declaredFields.length-1; i++){
+            declaredFields[i].setAccessible(true);
+            if (i == 2) {
+                String s = (String) declaredFields[i].get(allData);
+                declaredFields[i].set(newdata,s);
+            } else {
+                declaredFields[i].setFloat(newdata,declaredFields[i].getFloat(allData));
+            }
+        }
+        bdDAO.saveData(newdata);
+        System.out.println(newdata);
+        model.addAttribute("allData", newdata);
+        return "updatealldata";
+    }
 }
