@@ -16,23 +16,19 @@ import java.util.ArrayList;
 
 @Controller
 public class DBConroller {
-
     @Autowired
     BdDAO bdDAO;
-
     @GetMapping("/alldata")
     public String allData(Model model){
         model.addAttribute("data1", bdDAO.getSemestrAndNullTeacher(null, 1));
         model.addAttribute("data2", bdDAO.getSemestrAndNullTeacher(null,2));
         return "alldata";
     }
-
     @GetMapping("/teachers")
     public String loadteachers(Model model){
         model.addAttribute("data", bdDAO.getTeachers());
         return "teachers";
     }
-
     @GetMapping("/setteacher/{id}/{name}")
     public String setteacher(@PathVariable(value = "id") Long id, @PathVariable(value = "name") String name, Model model){
         model.addAttribute("alldataname", name);
@@ -49,14 +45,12 @@ public class DBConroller {
         model.addAttribute("accept","Дані успішно змінені !");
         return "onedata";
     }
-
     @GetMapping("/all_deletealldata")
     public String all_deletealldata(Model model){
         bdDAO.deleteAllData();
         model.addAttribute("accept","Дані успішно видалені");
         return "alldata";
     }
-
     @GetMapping("/all_deleteallteachers")
     public String all_deleteallteachers(Model model){
         try {
@@ -69,7 +63,6 @@ public class DBConroller {
             return "teachers";
         }
     }
-
     @GetMapping("/updateOneData/{id}")
     public String updateOneData(@PathVariable(value = "id") Long id, Model model){
         if (id == -1){
@@ -83,18 +76,15 @@ public class DBConroller {
         model.addAttribute("data", bdDAO.getTeachers());
         return "updatealldata";
     }
-
     @PostMapping("/updateOneData")
-    public String updateOneDataa(@ModelAttribute all_data allData, @RequestParam Long choose, Model model){
-        bdDAO.updateOneData(allData, choose);
-
+    public String updateOneDataa(@ModelAttribute all_data allData, @RequestParam Long choose,@RequestParam String type, Model model){
+        bdDAO.updateOneData(allData, choose, type);
         model.addAttribute("data1", bdDAO.getSemestrAndTeacher(choose, 1));
         model.addAttribute("data2", bdDAO.getSemestrAndTeacher(choose,2));
         model.addAttribute("teacher", bdDAO.findOneTeacher(choose));
         model.addAttribute("accept","Дані успішно змінені !");
         return "onedata";
     }
-
     @GetMapping("/deleteOneData/{id}")
     public String deleteOneData(@PathVariable(value = "id") Long id, Model model){
         bdDAO.deleteOneData(id);
@@ -103,7 +93,6 @@ public class DBConroller {
         model.addAttribute("data2", bdDAO.getSemestrAndNullTeacher(null,2));
         return "alldata";
     }
-
     @GetMapping("/deleteOneData/{id}/{idt}")
     public String deleteOneDat(@PathVariable(value = "id") Long id, @PathVariable(value = "idt") Long idt, Model model){
         bdDAO.deleteOneData(id);
@@ -113,7 +102,6 @@ public class DBConroller {
         model.addAttribute("data2", bdDAO.getSemestrAndTeacher(idt,2));
         return "onedata";
     }
-
     @GetMapping("/updateOneTeacher/{id}")
     public String updateOneTeacher(@PathVariable(value = "id") Long id, Model model){
         if (id == -1){
@@ -125,7 +113,6 @@ public class DBConroller {
         model.addAttribute("teacher", teacher);
         return "updateteacher";
     }
-
     @PostMapping("/updateOneTeacher")
     public String updateOneTeacherr(@ModelAttribute Teachers teachers, Model model){
         bdDAO.updateTeacher(teachers);
@@ -133,8 +120,6 @@ public class DBConroller {
         model.addAttribute("data", bdDAO.getTeachers());
         return "teachers";
     }
-
-
     @GetMapping("/deleteOneTeacher/{id}")
     public String deleteOneTeacher(@PathVariable(value = "id") Long id, Model model){
         try {
@@ -148,8 +133,6 @@ public class DBConroller {
             return "teachers";
         }
     }
-
-
     @GetMapping("/choose")
     public String choose(Model model){
         model.addAttribute("data", bdDAO.getTeachers());
@@ -162,18 +145,15 @@ public class DBConroller {
         model.addAttribute("teacher", bdDAO.findOneTeacher(choose));
         return "onedata";
     }
-
     @GetMapping("/download")
     public String download(Model model){
         model.addAttribute("data", bdDAO.getTeachers());
         return "download";
     }
-
     @GetMapping("/addshablon")
     public String shablon(Model model){
         return "shablon";
     }
-
     @PostMapping("/loadshablon")
     public String loadteachers(Model model, @RequestParam MultipartFile file) throws IOException {
         bdDAO.saveShablon(file);
@@ -182,7 +162,6 @@ public class DBConroller {
         model.addAttribute("data2", bdDAO.getSemestr(2));
         return "alldata";
     }
-
     @GetMapping("/createCopy/{id}")
     public String createCopy(@PathVariable(value = "id") Long id, Model model) throws IllegalAccessException {
         all_data allData = bdDAO.findOneData(id);
@@ -199,8 +178,8 @@ public class DBConroller {
             }
         }
         bdDAO.saveData(newdata);
-        System.out.println(newdata);
         model.addAttribute("allData", newdata);
+        model.addAttribute("data", bdDAO.getTeachers());
         return "updatealldata";
     }
 }
