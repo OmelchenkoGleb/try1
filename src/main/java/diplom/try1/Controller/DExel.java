@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -90,19 +91,16 @@ public class DExel {
         } else {
             try {
                 mailSender.sendMessageWithAttachment(teacher.getEmail(),"Сгенероване пед навантаження для "+teacher.getName(), "Прошу подивіться файл в закріплені для цього письма.\nЗ повагою Оксана Дацюк.", file.getName());
-                if(file.delete()){
-                    System.out.println("Файл видалений");
-                }
+                Files.delete(file.toPath());
+
                 model.addAttribute("data", bdDAO.getTeachers());
                 model.addAttribute("accept","Файл викачено успішно !");
-                return "download";
+                return "teachers";
             } catch (Exception e) {
-                if(file.delete()){
-                    System.out.println("Файл видалений");
-                }
+                Files.delete(file.toPath());
                 model.addAttribute("data", bdDAO.getTeachers());
                 model.addAttribute("accept","s");
-                return "download";
+                return "teachers";
             }
 
         }

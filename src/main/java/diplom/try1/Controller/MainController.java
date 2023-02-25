@@ -23,21 +23,6 @@ public class MainController {
         model.addAttribute("data2", bdDAO.getSemestr(2));
         return "data";
     }
-    @GetMapping("/")
-    public String start(Model model){
-        ArrayList<shablon> shablon = bdDAO.isShablon();
-        if (shablon.size() == 0) {
-            model.addAttribute("link", "link");
-            model.addAttribute("data1", bdDAO.getSemestrAndNullTeacher(null, 1));
-            model.addAttribute("data2", bdDAO.getSemestrAndNullTeacher(null,2));
-            return "alldata";
-        } else {
-            model.addAttribute("data1", bdDAO.getSemestrAndNullTeacher(null, 1));
-            model.addAttribute("data2", bdDAO.getSemestrAndNullTeacher(null,2));
-            return "alldata";
-        }
-
-    }
     @GetMapping("/add_alldata")
     public String addalldata(Model model){
         return "index";
@@ -55,5 +40,10 @@ public class MainController {
     @GetMapping("test")
     public String test(Model model){
         return "/test";
+    }
+
+    @GetMapping("/addshablon")
+    public String shablon(Model model){
+        return "shablon";
     }
 }

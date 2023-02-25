@@ -4,12 +4,14 @@ package diplom.try1.Controller;
 import diplom.try1.DAO.BdDAO;
 import diplom.try1.Model.Teachers;
 import diplom.try1.Model.all_data;
+import diplom.try1.Model.shablon;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.script.ScriptException;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -77,7 +79,7 @@ public class DBConroller {
         return "updatealldata";
     }
     @PostMapping("/updateOneData")
-    public String updateOneDataa(@ModelAttribute all_data allData, @RequestParam Long choose,@RequestParam String type, Model model){
+    public String updateOneDataa(@ModelAttribute all_data allData, @RequestParam Long choose,@RequestParam String type, Model model)  {
         bdDAO.updateOneData(allData, choose, type);
         model.addAttribute("data1", bdDAO.getSemestrAndTeacher(choose, 1));
         model.addAttribute("data2", bdDAO.getSemestrAndTeacher(choose,2));
@@ -150,10 +152,6 @@ public class DBConroller {
         model.addAttribute("data", bdDAO.getTeachers());
         return "download";
     }
-    @GetMapping("/addshablon")
-    public String shablon(Model model){
-        return "shablon";
-    }
     @PostMapping("/loadshablon")
     public String loadteachers(Model model, @RequestParam MultipartFile file) throws IOException {
         bdDAO.saveShablon(file);
@@ -181,5 +179,26 @@ public class DBConroller {
         model.addAttribute("allData", newdata);
         model.addAttribute("data", bdDAO.getTeachers());
         return "updatealldata";
+    }
+    @GetMapping("/")
+    public String start(Model model){
+        ArrayList<shablon> shablon = bdDAO.isShablon();
+        if (shablon.size() == 0) {
+            model.addAttribute("link", "link");
+            model.addAttribute("data1", bdDAO.getSemestrAndNullTeacher(null, 1));
+            model.addAttribute("data2", bdDAO.getSemestrAndNullTeacher(null,2));
+            return "alldata";
+        } else {
+            model.addAttribute("data1", bdDAO.getSemestrAndNullTeacher(null, 1));
+            model.addAttribute("data2", bdDAO.getSemestrAndNullTeacher(null,2));
+            return "alldata";
+        }
+    }
+    @GetMapping("/zvit")
+    public String zvit(Model model){
+        model.addAttribute("data", bdDAO.getTeachers());
+        model.addAttribute("data1", bdDAO.getSemestr(1));
+        model.addAttribute("data2", bdDAO.getSemestr(2));
+        return "alldata";
     }
 }
