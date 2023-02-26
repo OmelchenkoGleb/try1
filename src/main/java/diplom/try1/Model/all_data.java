@@ -27,122 +27,122 @@ public class all_data {
     }
 
     @Column(name = "semestr")
-    private double semestr;
+    private float semestr;
     @Column(name = "Назва дисципліни, курс, шифр груп")
     private String name;
     @Column(name = "N")
-    private double N;
+    private float N;
     @Column(name = "Л")
-    private double LL;
+    private float LL;
     @Column(name = "П")
-    private double PP;
+    private float PP;
     @Column(name = "L")
-    private double L;
+    private float L;
     @Column(name = "І")
-    private double I;
+    private float I;
     @Column(name = "Е")
-    private double E;
+    private float E;
     @Column(name = "Z")
-    private double Z;
+    private float Z;
     @Column(name = "М")
-    private double M;
+    private float M;
     @Column(name = "Q")
-    private double Q;
+    private float Q;
     @Column(name = "G")
-    private double G;
+    private float G;
     @Column(name = "R")
-    private double R;
+    private float R;
     @Column(name = "D")
-    private double D;
+    private float D;
     @Column(name = "F")
-    private double F;
+    private float F;
     @Column(name = "Г")
-    private double GG;
+    private float GG;
     @Column(name = "ГП")
-    private double GGPP;
+    private float GGPP;
     @Column(name = "ГL")
-    private double GGL;
+    private float GGL;
     @Column(name = "ГК")
-    private double GGk;
+    private float GGk;
     @Column(name = "ГКП")
-    private double GGKPP;
+    private float GGKPP;
     @Column(name = "ГКL")
-    private double GGKL;
+    private float GGKL;
     @Column(name = "Б")
-    private double BB;
+    private float BB;
     @Column(name = "К")
-    private double K;
+    private float K;
     @Column(name = "БК")
-    private double BBk;
+    private float BBk;
     @Column(name = "КК")
-    private double KK;
+    private float KK;
     @Column(name = "Р")
-    private double P;
+    private float P;
     @Column(name = "РК")
-    private double PK;
+    private float PK;
     @Column(name = "Л х Р")
-    private double LL_P;
+    private float LL_P;
     @Column(name = "Л х РК")
-    private double LL_PK;
+    private float LL_PK;
     @Column(name = "П х ГП")
-    private double PP_GGPP;
+    private float PP_GGPP;
     @Column(name = "П х ГКП")
-    private double PP_GGKPP;
+    private float PP_GGKPP;
     @Column(name = "L х ГL")
-    private double L_GGL;
+    private float L_GGL;
     @Column(name = "L х ГКL")
-    private double L_GGKL;
+    private float L_GGKL;
     @Column(name = "ІхГх0,25")
-    private double I_GG_025;
+    private float I_GG_025;
     @Column(name = "ІхГх0,26")
-    private double I_GG_026;
+    private float I_GG_026;
 
 
     @Column(name = "0.33хEx(Б+БК)")
-    private double E_BBBBK_033;
+    private float E_BBBBK_033;
     @Column(name = "0.33хEx(К+КК)")
-    private double E_KKK_033;
+    private float E_KKK_033;
     @Column(name = "Заліки,+AL10")
-    private double zaliki;
+    private float zaliki;
 
 
 
     @Column(name = "2хГхZ")
-    private double GG_Z_2;
+    private float GG_Z_2;
     @Column(name = "0.25хМх(Б+БК)")
-    private double M_025_BBBBK;
+    private float M_025_BBBBK;
     @Column(name = "0.25хМх(К+КК)")
-    private double M_025_KKK;
+    private float M_025_KKK;
     @Column(name = "Qх(Б+БК)")
-    private double Q_BBBBK;
+    private float Q_BBBBK;
     @Column(name = "Qх(К+КК)")
-    private double Q_KKK;
+    private float Q_KKK;
     @Column(name = "Gх(Б+БК)")
-    private double G_BBBBK;
+    private float G_BBBBK;
     @Column(name = "Gх(К+КК)")
-    private double G_KKK;
+    private float G_KKK;
     @Column(name = "0.5хRх(Б+БК)")
-    private double R_BBBBK_05;
+    private float R_BBBBK_05;
     @Column(name = "0.5хRх(К+КК)")
-    private double R_KKK_05;
+    private float R_KKK_05;
     @Column(name = "0.33хDх(Б+БК)")
-    private double D_BBBBK_033;
+    private float D_BBBBK_033;
     @Column(name = "0.33хDх(К+КК)")
-    private double D_KKK_033;
+    private float D_KKK_033;
     @Column(name = "0.25хFх(Б+БК)")
-    private double BBBBK_F_025;
+    private float BBBBK_F_025;
     @Column(name = "0.25хFх(К+КК)")
-    private double KKK_F_025;
+    private float KKK_F_025;
     @Column(name = "2 х E х Г + 0,06 х N х (Б+БК)/25")
-    private double E_GG_2_006_N_BBBBK_25;
+    private float E_GG_2_006_N_BBBBK_25;
     @Column(name = "2хЕхГК+0,06хNх(К+КК)/25")
-    private double E_2_GGK_006_N_KKK_25;
+    private float E_2_GGK_006_N_KKK_25;
     @Column(name = "Всього годин")
-    private double all;
+    private float all;
     @Column(name = "Всього годин 2")
-    private double all2;
+    private float all2;
     @Column(name = "Обсяг дисциплін за семестр")
-    private double obsyag;
+    private float obsyag;
 
 
     @Override

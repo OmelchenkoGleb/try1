@@ -12,14 +12,13 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
+import java.io.*;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -49,7 +48,6 @@ public class DExel {
 
     @PostMapping("/loadteachers")
     public String loadteachers(Model model, @RequestParam MultipartFile file){
-
         ArrayList<Teachers> datalist = exelParser.parsertecher(file);
         bdDAO.savedataTeacherslist(datalist);
         model.addAttribute("accept","Дані успішно додані");
@@ -63,22 +61,17 @@ public class DExel {
         List<all_data> dataList1 = bdDAO.getSemestrAndTeacherList(choose,1);
         List<all_data> dataList2 = bdDAO.getSemestrAndTeacherList(choose,2);
         exelParser.download(teacher, dataList1, dataList2);
-
         File file = new File(teacher.getName() + ".xls");
-
         if (Objects.equals(download, "1")){
+           FileInputStream input = new FileInputStream(file);
+           BufferedInputStream buf = new BufferedInputStream(input);
             try {
-                response.setContentType("application/octet-stream");
-                response.setHeader("Content-Disposition", "attachment; filename=" + teacher.getName());
-                ServletOutputStream outputStream = response.getOutputStream();
-                BufferedInputStream inputStream = new BufferedInputStream(new FileInputStream(file));
-                byte[] buffer = new byte[1024];
-                int bytesRead = 0;
-                while ((bytesRead = inputStream.read(buffer)) != -1) {
-                    outputStream.write(buffer, 0, bytesRead);
-                }
-                inputStream.close();
-                outputStream.close();
+                response.setContentType("application/download");
+                response.setHeader("Content-Disposition", "attachment; filename=file.xls");
+                response.setContentLength((int) file.length());
+                FileCopyUtils.copy(buf, response.getOutputStream());
+                input.close();
+                buf.close();
                 if(file.delete()){
                     System.out.println("Файл видалений");
                 }
@@ -86,6 +79,8 @@ public class DExel {
                 model.addAttribute("accept","Файл викачено успішно !");
                 return "download";
             } catch (Exception e){
+                input.close();
+                buf.close();
                 if(file.delete()){
                     System.out.println("Файл видалений");
                 }
@@ -96,16 +91,13 @@ public class DExel {
         } else {
             try {
                 mailSender.sendMessageWithAttachment(teacher.getEmail(),"Сгенероване пед навантаження для "+teacher.getName(), "Прошу подивіться файл в закріплені для цього письма.\nЗ повагою Оксана Дацюк.", file.getName());
-                if(file.delete()){
-                    System.out.println("Файл видалений");
-                }
+                Files.delete(file.toPath());
+
                 model.addAttribute("data", bdDAO.getTeachers());
                 model.addAttribute("accept","Файл викачено успішно !");
                 return "download";
             } catch (Exception e) {
-                if(file.delete()){
-                    System.out.println("Файл видалений");
-                }
+                Files.delete(file.toPath());
                 model.addAttribute("data", bdDAO.getTeachers());
                 model.addAttribute("accept","s");
                 return "download";

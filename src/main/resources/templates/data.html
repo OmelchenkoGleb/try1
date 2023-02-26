@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
 
-  <title>Дані з предметів без викладача</title>
+  <title>Усі предмети</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link rel="stylesheet" href = "/static/css/css.css">
 
@@ -96,9 +96,9 @@
             <li><a href="/all_deleteallteachers" class="btn btn-danger navbar-btn">Видалити усіх викладачів</a></li>
           </div>
           <ul class="nav navbar-nav">
-            <li><a href="/data">Переглянути усі предмети</a></li>
+            <li class="active"><a href="/data">Переглянути усі предмети</a></li>
             <li><a href="/choose">Переглянути предмети по викладачам</a></li>
-            <li class="active"><a href="/alldata">Переглянути предмети де нема викладача</a></li>
+            <li><a href="/alldata">Переглянути предмети де нема викладача</a></li>
             <li><a href="/teachers">Переглянути таблицю з викладачами</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
@@ -118,12 +118,10 @@
 
 
 <div class="jumbotron text-center">
-  <div th:if="${teacher}">
-    <h1 th:text="${teacher.getName()}"></h1>
-  </div>
   <h1>Перший семестр</h1>
   <button type="button" onclick="myFunction1()" class="btn btn-light">Відкрити/Закрити</button>
 </div>
+
 
 <div class="table-responsive-sm" id="myDIV1">
   <input class="form-control" id="Input1" type="text" placeholder="Ведіть інформацію по якій шукати для першого семестра..">
@@ -134,31 +132,31 @@
       <th>Факультет. Назва  дис., обсяг в год.. Курс, шифр, к-сть студент.</th>
       <th>Викл.</th>
 
-<!--      <th>Обсяг дисципліни за семестр</th>-->
-<!--      <th>Лекції</th>-->
-<!--      <th>Практ</th>-->
-<!--      <th>Лабор</th>-->
-<!--      <th>Індивідуальні заняття</th>-->
-<!--      <th>Екзамени</th>-->
-<!--      <th>Заліки</th>-->
-<!--      <th>Контр.роб</th>-->
-<!--      <th>Курсові проекти</th>-->
-<!--      <th>Курсові роботи</th>-->
-<!--      <th>РГР, РР, ГР,</th>-->
-<!--      <th>ДКР</th>-->
-<!--      <th>Реферати</th>-->
-<!--      <th>Академічні бюдж</th>-->
-<!--      <th>Підгрупи для ПЗ</th>-->
-<!--      <th>Підгр. для лаб.роб</th>-->
-<!--      <th>Академ. контрактні</th>-->
-<!--      <th>Підгрупи для ПЗ</th>-->
-<!--      <th>Підгр. для лаб.роб</th>-->
-<!--      <th>Б</th>-->
-<!--      <th>К</th>-->
-<!--      <th>БК</th>-->
-<!--      <th>КК</th>-->
-<!--      <th>Кількість бюджетних потоків</th>-->
-<!--      <th>Кількість контрактних потоків</th>-->
+      <!--      <th>Обсяг дисципліни за семестр</th>-->
+      <!--      <th>Лекції</th>-->
+      <!--      <th>Практ</th>-->
+      <!--      <th>Лабор</th>-->
+      <!--      <th>Індивідуальні заняття</th>-->
+      <!--      <th>Екзамени</th>-->
+      <!--      <th>Заліки</th>-->
+      <!--      <th>Контр.роб</th>-->
+      <!--      <th>Курсові проекти</th>-->
+      <!--      <th>Курсові роботи</th>-->
+      <!--      <th>РГР, РР, ГР,</th>-->
+      <!--      <th>ДКР</th>-->
+      <!--      <th>Реферати</th>-->
+      <!--      <th>Академічні бюдж</th>-->
+      <!--      <th>Підгрупи для ПЗ</th>-->
+      <!--      <th>Підгр. для лаб.роб</th>-->
+      <!--      <th>Академ. контрактні</th>-->
+      <!--      <th>Підгрупи для ПЗ</th>-->
+      <!--      <th>Підгр. для лаб.роб</th>-->
+      <!--      <th>Б</th>-->
+      <!--      <th>К</th>-->
+      <!--      <th>БК</th>-->
+      <!--      <th>КК</th>-->
+      <!--      <th>Кількість бюджетних потоків</th>-->
+      <!--      <th>Кількість контрактних потоків</th>-->
 
       <th>Лек.</th>
       <th>Лек.К</th>
@@ -197,34 +195,40 @@
     <tbody id="Table1">
     <tr th:each="el : ${data1}">
       <th th:text="${el.name}"></th>
-      <th><a target="_blank" th:href="@{'/setteacher/{id}/{name}'(id=${el.id}, name=${el.name})}">Обрати викладача</a></th>
+      <div th:if="${el.teachers}">
+        <th th:text="${el.teachers.name}"></th>
+      </div>
+      <div th:unless="${el.teachers}">
+        <th><a target="_blank" th:href="@{'/setteacher/{id}/{name}'(id=${el.id}, name=${el.name})}">Обрати викладача</a></th>
+      </div>
 
 
-<!--      <th th:text="${el.N}"></th>-->
-<!--      <th th:text="${el.LL}"></th>-->
-<!--      <th th:text="${el.PP}"></th>-->
-<!--      <th th:text="${el.L}"></th>-->
-<!--      <th th:text="${el.I}"></th>-->
-<!--      <th th:text="${el.E}"></th>-->
-<!--      <th th:text="${el.Z}"></th>-->
-<!--      <th th:text="${el.M}"></th>-->
-<!--      <th th:text="${el.Q}"></th>-->
-<!--      <th th:text="${el.G}"></th>-->
-<!--      <th th:text="${el.R}"></th>-->
-<!--      <th th:text="${el.D}"></th>-->
-<!--      <th th:text="${el.F}"></th>-->
-<!--      <th th:text="${el.GG}"></th>-->
-<!--      <th th:text="${el.GGPP}"></th>-->
-<!--      <th th:text="${el.GGL}"></th>-->
-<!--      <th th:text="${el.GGk}"></th>-->
-<!--      <th th:text="${el.GGKPP}"></th>-->
-<!--      <th th:text="${el.GGKL}"></th>-->
-<!--      <th th:text="${el.BB}"></th>-->
-<!--      <th th:text="${el.K}"></th>-->
-<!--      <th th:text="${el.BBk}"></th>-->
-<!--      <th th:text="${el.KK}"></th>-->
-<!--      <th th:text="${el.P}"></th>-->
-<!--      <th th:text="${el.PK}"></th>-->
+
+      <!--      <th th:text="${el.N}"></th>-->
+      <!--      <th th:text="${el.LL}"></th>-->
+      <!--      <th th:text="${el.PP}"></th>-->
+      <!--      <th th:text="${el.L}"></th>-->
+      <!--      <th th:text="${el.I}"></th>-->
+      <!--      <th th:text="${el.E}"></th>-->
+      <!--      <th th:text="${el.Z}"></th>-->
+      <!--      <th th:text="${el.M}"></th>-->
+      <!--      <th th:text="${el.Q}"></th>-->
+      <!--      <th th:text="${el.G}"></th>-->
+      <!--      <th th:text="${el.R}"></th>-->
+      <!--      <th th:text="${el.D}"></th>-->
+      <!--      <th th:text="${el.F}"></th>-->
+      <!--      <th th:text="${el.GG}"></th>-->
+      <!--      <th th:text="${el.GGPP}"></th>-->
+      <!--      <th th:text="${el.GGL}"></th>-->
+      <!--      <th th:text="${el.GGk}"></th>-->
+      <!--      <th th:text="${el.GGKPP}"></th>-->
+      <!--      <th th:text="${el.GGKL}"></th>-->
+      <!--      <th th:text="${el.BB}"></th>-->
+      <!--      <th th:text="${el.K}"></th>-->
+      <!--      <th th:text="${el.BBk}"></th>-->
+      <!--      <th th:text="${el.KK}"></th>-->
+      <!--      <th th:text="${el.P}"></th>-->
+      <!--      <th th:text="${el.PK}"></th>-->
 
 
       <th th:text="${el.LL_P}"></th>
@@ -259,7 +263,12 @@
       <th th:text="${el.all2}"></th>
       <th th:text="${el.obsyag}"></th>
       <th><a target="_blank" th:href="@{'/updateOneData/{id}'(id=${el.id})}">Ред.</a></th>
-      <th><a th:href="@{'/deleteOneData/{id}'(id=${el.id})}">Вид.</a></th>
+      <div th:if="${teacher}">
+        <th><a th:href="@{'/deleteOneData/{id}/{idt}'(id=${el.id},idt=${el.teachers.id})}">Вид.</a></th>
+      </div>
+      <div th:unless="${teacher}">
+        <th><a th:href="@{'/deleteOneData/{id}'(id=${el.id})}">Вид.</a></th>
+      </div>
     </tr>
     </tbody>
   </table>
@@ -342,33 +351,38 @@
     <tbody id="Table2">
     <tr th:each="el : ${data2}">
       <th th:text="${el.name}"></th>
-      <th><a target="_blank" th:href="@{'/setteacher/{id}/{name}'(id=${el.id}, name=${el.name})}">Обрати викладача</a></th>
+      <div th:if="${teacher}">
+        <th th:text="${el.teachers.name}"></th>
+      </div>
+      <div th:unless="${teacher}">
+        <th><a target="_blank" th:href="@{'/setteacher/{id}/{name}'(id=${el.id}, name=${el.name})}">Обрати викладача</a></th>
+      </div>
 
-<!--      <th th:text="${el.N}"></th>-->
-<!--      <th th:text="${el.LL}"></th>-->
-<!--      <th th:text="${el.PP}"></th>-->
-<!--      <th th:text="${el.L}"></th>-->
-<!--      <th th:text="${el.I}"></th>-->
-<!--      <th th:text="${el.E}"></th>-->
-<!--      <th th:text="${el.Z}"></th>-->
-<!--      <th th:text="${el.M}"></th>-->
-<!--      <th th:text="${el.Q}"></th>-->
-<!--      <th th:text="${el.G}"></th>-->
-<!--      <th th:text="${el.R}"></th>-->
-<!--      <th th:text="${el.D}"></th>-->
-<!--      <th th:text="${el.F}"></th>-->
-<!--      <th th:text="${el.GG}"></th>-->
-<!--      <th th:text="${el.GGPP}"></th>-->
-<!--      <th th:text="${el.GGL}"></th>-->
-<!--      <th th:text="${el.GGk}"></th>-->
-<!--      <th th:text="${el.GGKPP}"></th>-->
-<!--      <th th:text="${el.GGKL}"></th>-->
-<!--      <th th:text="${el.BB}"></th>-->
-<!--      <th th:text="${el.K}"></th>-->
-<!--      <th th:text="${el.BBk}"></th>-->
-<!--      <th th:text="${el.KK}"></th>-->
-<!--      <th th:text="${el.P}"></th>-->
-<!--      <th th:text="${el.PK}"></th>-->
+      <!--      <th th:text="${el.N}"></th>-->
+      <!--      <th th:text="${el.LL}"></th>-->
+      <!--      <th th:text="${el.PP}"></th>-->
+      <!--      <th th:text="${el.L}"></th>-->
+      <!--      <th th:text="${el.I}"></th>-->
+      <!--      <th th:text="${el.E}"></th>-->
+      <!--      <th th:text="${el.Z}"></th>-->
+      <!--      <th th:text="${el.M}"></th>-->
+      <!--      <th th:text="${el.Q}"></th>-->
+      <!--      <th th:text="${el.G}"></th>-->
+      <!--      <th th:text="${el.R}"></th>-->
+      <!--      <th th:text="${el.D}"></th>-->
+      <!--      <th th:text="${el.F}"></th>-->
+      <!--      <th th:text="${el.GG}"></th>-->
+      <!--      <th th:text="${el.GGPP}"></th>-->
+      <!--      <th th:text="${el.GGL}"></th>-->
+      <!--      <th th:text="${el.GGk}"></th>-->
+      <!--      <th th:text="${el.GGKPP}"></th>-->
+      <!--      <th th:text="${el.GGKL}"></th>-->
+      <!--      <th th:text="${el.BB}"></th>-->
+      <!--      <th th:text="${el.K}"></th>-->
+      <!--      <th th:text="${el.BBk}"></th>-->
+      <!--      <th th:text="${el.KK}"></th>-->
+      <!--      <th th:text="${el.P}"></th>-->
+      <!--      <th th:text="${el.PK}"></th>-->
 
       <th th:text="${el.LL_P}"></th>
       <th th:text="${el.LL_PK}"></th>
@@ -400,7 +414,13 @@
       <th th:text="${el.all2}"></th>
       <th th:text="${el.obsyag}"></th>
       <th><a target="_blank" th:href="@{'/updateOneData/{id}'(id=${el.id})}">Ред.</a></th>
-      <th><a th:href="@{'/deleteOneData/{id}'(id=${el.id})}">Вид.</a></th>
+
+      <div th:if="${teacher}">
+        <th><a th:href="@{'/deleteOneData/{id}/{idt}'(id=${el.id},idt=${el.teachers.id})}">Вид.</a></th>
+      </div>
+      <div th:unless="${teacher}">
+        <th><a th:href="@{'/deleteOneData/{id}'(id=${el.id})}">Вид.</a></th>
+      </div>
     </tr>
     </tbody>
   </table>
