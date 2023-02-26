@@ -1,12 +1,9 @@
 package diplom.try1.DAO;
 
-import diplom.try1.CrudRepository.CrudAllData;
-import diplom.try1.CrudRepository.CrudShablon;
-import diplom.try1.CrudRepository.CrudTeachers;
-import diplom.try1.CrudRepository.ReportInterface;
-import diplom.try1.Model.Report;
+import diplom.try1.CrudRepository.*;
 import diplom.try1.Model.Teachers;
 import diplom.try1.Model.all_data;
+import diplom.try1.Model.report;
 import diplom.try1.Model.shablon;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -25,9 +22,14 @@ public class BdDAO {
     CrudTeachers crudTeachers;
     @Autowired
     CrudShablon crudShablon;
+    @Autowired
+    CrudReport crudReport;
 
     public ArrayList<shablon> isShablon(){
         return (ArrayList<shablon>) crudShablon.findAll();
+    }
+    public ArrayList<report> isReport(String name){
+        return (ArrayList<report>) crudReport.findAllByName(name);
     }
     public void savedatalist(ArrayList<all_data> datalist){
         crudAllData.saveAll(datalist);
@@ -177,5 +179,9 @@ public class BdDAO {
     }
 
     public List<ReportInterface> getReport() { return crudAllData.findGroupByReportWithJPQL();
+    }
+
+    public void saveReport(report report) {
+        crudReport.save(report);
     }
 }

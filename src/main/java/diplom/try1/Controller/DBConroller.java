@@ -1,9 +1,11 @@
 package diplom.try1.Controller;
 
 
+import diplom.try1.CrudRepository.ReportInterface;
 import diplom.try1.DAO.BdDAO;
 import diplom.try1.Model.Teachers;
 import diplom.try1.Model.all_data;
+import diplom.try1.Model.report;
 import diplom.try1.Model.shablon;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +17,7 @@ import javax.script.ScriptException;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class DBConroller {
@@ -96,7 +99,6 @@ public class DBConroller {
             model.addAttribute("data2", bdDAO.getSemestrAndNullTeacher(null,2));
             return "alldata";
         } catch (Exception e){
-            bdDAO.deleteOneData(id);
             model.addAttribute("fail","Дані вже видалені");
             model.addAttribute("data1", bdDAO.getSemestrAndNullTeacher(null, 1));
             model.addAttribute("data2", bdDAO.getSemestrAndNullTeacher(null,2));
@@ -213,11 +215,46 @@ public class DBConroller {
     }
     @GetMapping("/zvit")
     public String zvit(Model model){
-        System.out.println(bdDAO.getReport().size());
+        List<ReportInterface> data = bdDAO.getReport();
         bdDAO.getReport().forEach(x->{
-            System.out.println(x.getName());
+            ArrayList<report> list = bdDAO.isReport(x.getName());
+            report report = new report();
+            if (list.size() != 0) {
+                Long id = list.get(0).getId();
+                report.setId(id);
+            }
+            report.setAll(x.getAll());
+            report.setAll2(x.getAll2());
+            report.setBBBBK_F_025(x.getBBBBK_F_025());
+            report.setG_BBBBK(x.getG_BBBBK());
+            report.setD_KKK_033(x.getD_KKK_033());
+            report.setD_BBBBK_033(x.getD_BBBBK_033());
+            report.setG_KKK(x.getG_KKK());
+            report.setName(x.getName());
+            report.setN(x.getN());
+            report.setE_2_GGK_006_N_KKK_25(x.getE_2_GGK_006_N_KKK_25());
+            report.setE_GG_2_006_N_BBBBK_25(x.getE_GG_2_006_N_BBBBK_25());
+            report.setKKK_F_025(x.getKKK_F_025());
+            report.setR_KKK_05(x.getR_KKK_05());
+            report.setR_BBBBK_05(x.getR_BBBBK_05());
+            report.setQ_BBBBK(x.getQ_BBBBK());
+            report.setM_025_BBBBK(x.getM_025_BBBBK());
+            report.setM_025_KKK(x.getM_025_KKK());
+            report.setGG_Z_2(x.getGG_Z_2());
+            report.setZaliki(x.getzaliki());
+            report.setE_KKK_033(x.getE_KKK_033());
+            report.setE_BBBBK_033(x.getE_BBBBK_033());
+            report.setI_GG_026(x.getI_GG_026());
+            report.setI_GG_025(x.getI_GG_025());
+            report.setL_GGKL(x.getL_GGKL());
+            report.setL_GGL(x.getL_GGL());
+            report.setPP_GGKPP(x.getPP_GGKPP());
+            report.setPP_GGPP(x.getPP_GGPP());
+            report.setLL_P(x.getLL_P());
+            report.setLL_PK(x.getLL_PK());
+            bdDAO.saveReport(report);
         });
-        model.addAttribute("data", bdDAO.getReport());
+        model.addAttribute("data", data);
         return "zvit";
     }
 }

@@ -1,6 +1,5 @@
 package diplom.try1.CrudRepository;
 
-import diplom.try1.Model.Report;
 import diplom.try1.Model.Teachers;
 import diplom.try1.Model.all_data;
 import org.springframework.data.jpa.repository.Query;
