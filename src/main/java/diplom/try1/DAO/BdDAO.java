@@ -3,17 +3,15 @@ package diplom.try1.DAO;
 import diplom.try1.CrudRepository.CrudAllData;
 import diplom.try1.CrudRepository.CrudShablon;
 import diplom.try1.CrudRepository.CrudTeachers;
+import diplom.try1.CrudRepository.ReportInterface;
+import diplom.try1.Model.Report;
 import diplom.try1.Model.Teachers;
 import diplom.try1.Model.all_data;
 import diplom.try1.Model.shablon;
-import jakarta.persistence.Column;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.script.ScriptEngine;
-import javax.script.ScriptEngineManager;
-import javax.script.ScriptException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -176,5 +174,8 @@ public class BdDAO {
         float All2 = LL_PK + PP_GGKPP + L_GGKL + I_GG_026 + E_KKK_033 + GG_Z_2 + M_025_KKK + Q_KKK + G_KKK + R_KKK_05 + D_KKK_033 + KKK_F_025 + E_2_GGK_006_N_KKK_25;
         allData.setAll2(All2);
         crudAllData.save(allData);
+    }
+
+    public List<ReportInterface> getReport() { return crudAllData.findGroupByReportWithJPQL();
     }
 }

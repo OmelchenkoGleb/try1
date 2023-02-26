@@ -95,12 +95,12 @@ public class DExel {
 
                 model.addAttribute("data", bdDAO.getTeachers());
                 model.addAttribute("accept","Файл викачено успішно !");
-                return "teachers";
+                return "download";
             } catch (Exception e) {
                 Files.delete(file.toPath());
                 model.addAttribute("data", bdDAO.getTeachers());
                 model.addAttribute("accept","s");
-                return "teachers";
+                return "download";
             }
 
         }

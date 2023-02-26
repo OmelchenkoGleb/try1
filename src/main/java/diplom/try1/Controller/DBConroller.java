@@ -89,20 +89,37 @@ public class DBConroller {
     }
     @GetMapping("/deleteOneData/{id}")
     public String deleteOneData(@PathVariable(value = "id") Long id, Model model){
-        bdDAO.deleteOneData(id);
-        model.addAttribute("accept","Дані успішно видалені");
-        model.addAttribute("data1", bdDAO.getSemestrAndNullTeacher(null, 1));
-        model.addAttribute("data2", bdDAO.getSemestrAndNullTeacher(null,2));
-        return "alldata";
+        try {
+            bdDAO.deleteOneData(id);
+            model.addAttribute("accept","Дані успішно видалені");
+            model.addAttribute("data1", bdDAO.getSemestrAndNullTeacher(null, 1));
+            model.addAttribute("data2", bdDAO.getSemestrAndNullTeacher(null,2));
+            return "alldata";
+        } catch (Exception e){
+            bdDAO.deleteOneData(id);
+            model.addAttribute("fail","Дані вже видалені");
+            model.addAttribute("data1", bdDAO.getSemestrAndNullTeacher(null, 1));
+            model.addAttribute("data2", bdDAO.getSemestrAndNullTeacher(null,2));
+            return "alldata";
+        }
     }
     @GetMapping("/deleteOneData/{id}/{idt}")
     public String deleteOneDat(@PathVariable(value = "id") Long id, @PathVariable(value = "idt") Long idt, Model model){
-        bdDAO.deleteOneData(id);
-        model.addAttribute("accept","Дані успішно видалені");
-        model.addAttribute("teacher", bdDAO.findOneTeacher(idt));
-        model.addAttribute("data1", bdDAO.getSemestrAndTeacher(idt, 1));
-        model.addAttribute("data2", bdDAO.getSemestrAndTeacher(idt,2));
-        return "onedata";
+        try {
+            bdDAO.deleteOneData(id);
+            model.addAttribute("accept","Дані успішно видалені");
+            model.addAttribute("teacher", bdDAO.findOneTeacher(idt));
+            model.addAttribute("data1", bdDAO.getSemestrAndTeacher(idt, 1));
+            model.addAttribute("data2", bdDAO.getSemestrAndTeacher(idt,2));
+            return "onedata";
+        } catch (Exception e) {
+            model.addAttribute("fail","Дані вже видалені");
+            model.addAttribute("teacher", bdDAO.findOneTeacher(idt));
+            model.addAttribute("data1", bdDAO.getSemestrAndTeacher(idt, 1));
+            model.addAttribute("data2", bdDAO.getSemestrAndTeacher(idt,2));
+            return "onedata";
+        }
+
     }
     @GetMapping("/updateOneTeacher/{id}")
     public String updateOneTeacher(@PathVariable(value = "id") Long id, Model model){
@@ -196,9 +213,11 @@ public class DBConroller {
     }
     @GetMapping("/zvit")
     public String zvit(Model model){
-        model.addAttribute("data", bdDAO.getTeachers());
-        model.addAttribute("data1", bdDAO.getSemestr(1));
-        model.addAttribute("data2", bdDAO.getSemestr(2));
-        return "alldata";
+        System.out.println(bdDAO.getReport().size());
+        bdDAO.getReport().forEach(x->{
+            System.out.println(x.getName());
+        });
+        model.addAttribute("data", bdDAO.getReport());
+        return "zvit";
     }
 }
