@@ -67,7 +67,7 @@ public class DExel {
            BufferedInputStream buf = new BufferedInputStream(input);
             try {
                 response.setContentType("application/download");
-                response.setHeader("Content-Disposition", "attachment; filename=file.xls");
+                response.setHeader("Content-Disposition", "attachment; filename="+teacher.getId()+".xls");
                 response.setContentLength((int) file.length());
                 FileCopyUtils.copy(buf, response.getOutputStream());
                 input.close();

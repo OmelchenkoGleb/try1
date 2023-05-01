@@ -184,4 +184,8 @@ public class BdDAO {
     public void saveReport(report report) {
         crudReport.save(report);
     }
+
+    public void deleteAllReport() {
+        crudReport.deleteAll();
+    }
 }

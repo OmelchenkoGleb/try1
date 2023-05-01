@@ -53,6 +53,7 @@ public class DBConroller {
     @GetMapping("/all_deletealldata")
     public String all_deletealldata(Model model){
         bdDAO.deleteAllData();
+        bdDAO.deleteAllReport();
         model.addAttribute("accept","Дані успішно видалені");
         return "alldata";
     }
@@ -60,6 +61,7 @@ public class DBConroller {
     public String all_deleteallteachers(Model model){
         try {
             bdDAO.deleteAllTeachers();
+            bdDAO.deleteAllReport();
             model.addAttribute("accept","Дані успішно видалені");
             return "teachers";
         } catch (Exception e){
